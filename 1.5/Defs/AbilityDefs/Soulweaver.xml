@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+        <defName>SW_SoulMark</defName>
+        <label>soul mark</label>
+        <description>Mark a target's consciousness with your psychic signature, creating a spiritual link that allows you to prepare for future soul transfer abilities. This dark art is the first step in mastering the forbidden technique of consciousness manipulation.</description>
+        <iconPath>Abilities/Soulweaver/SoulMark</iconPath>
+        <abilityClass>Soulweaver.Ability_SoulMark</abilityClass>
+        <castSound>SW_SoulMark_Cast</castSound>
+        <targetMode>Pawn</targetMode>
+        <distanceToTarget>1.5</distanceToTarget>
+        <needsTicking>true</needsTicking>
+        <drawAimPie>false</drawAimPie>
+        <targetingParameters>
+            <canTargetBuildings>False</canTargetBuildings>
+            <canTargetSelf>False</canTargetSelf>
+            <canTargetAnimals>False</canTargetAnimals>
+            <canTargetPawns>True</canTargetPawns>
+            <canTargetHumans>True</canTargetHumans>
+            <canTargetMechs>False</canTargetMechs>
+        </targetingParameters>
+        <castTime>300</castTime>
+        <modExtensions>
+            <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+                <path>SW_Soulweaver</path>
+                <level>1</level>
+                <order>1</order>
+                <psyfocusCost>0.4</psyfocusCost>
+                <entropyGain>0</entropyGain>
+                <!-- need to test if i want this or not, does it mean the target or caster? -->
+                <psychic>True</psychic>
+            </li>
+            <!-- need to either depend on the puppet mod or make my own validator -->
+            <!-- <li Class="VPEPuppeteer.AbilityExtension_TargetValidator"> 
+                <ofCasterFaction>True</ofCasterFaction>
+                <allowPrisoners>True</allowPrisoners>
+            </li> -->
+        </modExtensions>
+    </VFECore.Abilities.AbilityDef>
+</Defs>

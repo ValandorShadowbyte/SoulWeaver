@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <VanillaPsycastsExpanded.PsycasterPathDef>
+    <defName>SW_Soulweaver</defName>
+    <label>soulweaver</label>
+    <description>Soulweaver psycasts focus on transferring consciousness between bodies, allowing you to possess enemies, swap bodies with allies, and achieve immortality through continuous soul transfer.</description>
+    <background>UI/Backgrounds/SoulweaverPath</background>
+    <altBackground>UI/Backgrounds/SoulweaverPath</altBackground>
+    <tab>Psycasts</tab>
+    <tooltip>Soulweavers are forbidden psycasters who have mastered the dark art of consciousness transfer. They can possess the bodies of enemies to turn them against their allies, swap consciousness with pawns to escape death, and even create vessels to house their soul when their current body becomes too damaged. These masters of body-hopping are feared for their ability to never truly die, always finding a new host when their current vessel fails them.</tooltip>
+  </VanillaPsycastsExpanded.PsycasterPathDef>
+</Defs>

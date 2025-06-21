@@ -2,7 +2,7 @@
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36212.18 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoulTransfer", "SoulTransfer.csproj", "{B5032211-E056-4CA4-A80F-0AC0AAFB8D05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoulWeaver", "SoulWeaver.csproj", "{B5032211-E056-4CA4-A80F-0AC0AAFB8D05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

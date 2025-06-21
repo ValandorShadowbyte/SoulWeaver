@@ -2,7 +2,6 @@
 [Bb]in/
 [Oo]bj/
 *.exe
-*.dll
 *.pdb
 *.cache
 *.log
@@ -38,6 +37,4 @@
 *.swo
 *.DS_Store
 Thumbs.db
-
-# Assemblies
-Assemblies/ 
+Source/SoulWeaver/Plugins

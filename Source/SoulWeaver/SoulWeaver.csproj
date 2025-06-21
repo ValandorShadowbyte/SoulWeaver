@@ -7,8 +7,8 @@
     <ProjectGuid>{B5032211-E056-4CA4-A80F-0AC0AAFB8D05}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SoulTransfer</RootNamespace>
-    <AssemblyName>SoulTransfer</AssemblyName>
+    <RootNamespace>SoulWeaver</RootNamespace>
+    <AssemblyName>SoulWeaver</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,7 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="SoulTransferMod.cs" />
+    <Compile Include="Ability_SoulMark.cs" />
+    <Compile Include="SoulWeaverMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -42,9 +43,15 @@
       <Version>2.3.6</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="VFECore">
+      <HintPath>Plugins\VFECore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <Target Name="CustomCleanHarmony" AfterTargets="Build">
     <Delete Files="$(OutputPath)0Harmony.dll" />
     <Delete Files="$(OutputPath)0Harmony.pdb" />
+    <Delete Files="$(OutputPath)VFECore.dll" />
   </Target>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
