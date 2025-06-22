@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <!-- Soul Marked Thought -->
+    <ThoughtDef>
+        <defName>SW_SoulMarked</defName>
+        <durationDays>3</durationDays>
+        <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+        <stages>
+            <li>
+                <label>soul marked</label>
+                <description>My consciousness has been marked with a psychic signature. I can feel the caster's presence in my mind, and it's deeply unsettling.</description>
+                <baseMoodEffect>-20</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+</Defs> 

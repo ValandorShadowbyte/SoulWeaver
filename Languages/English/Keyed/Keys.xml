@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguagData>
+	<SW.TargetMustBeDown>Target must be downed.</SW.TargetMustBeDown>
+	<SW.TargetMustBeMarked>Target must be under the affect of a soul mark.</SW.TargetMustBeMarked>
+    <SW.TargetMustBeAdvancedMarked>Target must be under the affect of an advanced soul mark.</SW.TargetMustBeAdvancedMarked>
+    <SW.TargetAlreadyAwakenedMarked>Target is already under the effect of an awakened soul mark.</SW.TargetAlreadyAwakenedMarked>
+</LanguagData>

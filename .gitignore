@@ -37,4 +37,9 @@
 *.swo
 *.DS_Store
 Thumbs.db
+
+# C# side
 Source/SoulWeaver/Plugins
+
+Assemblies/*
+!Assemblies/SoulWeaver.dll

@@ -3,12 +3,45 @@
     <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
         <defName>SW_SoulMark</defName>
         <label>soul mark</label>
-        <description>Mark a target's consciousness with your psychic signature, creating a spiritual link that allows you to prepare for future soul transfer abilities. This dark art is the first step in mastering the forbidden technique of consciousness manipulation.</description>
+        <description>Mark a target's consciousness with your psychic signature, creating a spiritual link that draws them irresistibly toward joining your faction. This dark art allows you to prepare for future soul transfer abilities through the forbidden technique of consciousness manipulation.</description>
         <iconPath>Abilities/Soulweaver/SoulMark</iconPath>
         <abilityClass>Soulweaver.Ability_SoulMark</abilityClass>
-        <castSound>SW_SoulMark_Cast</castSound>
+        <castSound>SW_Cast</castSound>
         <targetMode>Pawn</targetMode>
-        <distanceToTarget>1.5</distanceToTarget>
+        <distanceToTarget>1.0</distanceToTarget>
+        <needsTicking>true</needsTicking>
+        <drawAimPie>false</drawAimPie>
+        <goodwillImpact>-10</goodwillImpact>
+        <targetingParameters>
+            <canTargetBuildings>False</canTargetBuildings>
+            <canTargetSelf>False</canTargetSelf>
+            <canTargetAnimals>False</canTargetAnimals>
+            <canTargetPawns>True</canTargetPawns>
+            <canTargetHumans>True</canTargetHumans>
+            <canTargetMechs>False</canTargetMechs>
+        </targetingParameters>
+        <castTime>100</castTime>
+        <modExtensions>
+            <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+                <path>SW_Soulweaver</path>
+                <level>1</level>
+                <order>1</order>
+                <psyfocusCost>0.5</psyfocusCost>
+                <entropyGain>0.5</entropyGain>
+                <psychic>False</psychic>
+            </li>
+        </modExtensions>
+    </VFECore.Abilities.AbilityDef>
+
+    <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+        <defName>SW_AwakenedSoulMark</defName>
+        <label>awakened soul mark</label>
+        <description>An enhanced version of soul marking that creates a deeper, more permanent spiritual connection. This awakened technique allows for greater control over the target's consciousness and provides a stronger foundation for soul manipulation abilities. The mark is more difficult to resist and creates a more profound psychic bond.</description>
+        <iconPath>Abilities/Soulweaver/AwakenedSoulMark</iconPath>
+        <abilityClass>Soulweaver.Ability_AwakenedSoulMark</abilityClass>
+        <castSound>SW_Cast</castSound>
+        <targetMode>Pawn</targetMode>
+        <distanceToTarget>1.0</distanceToTarget>
         <needsTicking>true</needsTicking>
         <drawAimPie>false</drawAimPie>
         <targetingParameters>
@@ -19,22 +52,22 @@
             <canTargetHumans>True</canTargetHumans>
             <canTargetMechs>False</canTargetMechs>
         </targetingParameters>
-        <castTime>300</castTime>
+        <castTime>600</castTime>
         <modExtensions>
             <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
                 <path>SW_Soulweaver</path>
-                <level>1</level>
+                <level>2</level>
                 <order>1</order>
-                <psyfocusCost>0.4</psyfocusCost>
-                <entropyGain>0</entropyGain>
-                <!-- need to test if i want this or not, does it mean the target or caster? -->
-                <psychic>True</psychic>
+                <psyfocusCost>0.2</psyfocusCost>
+                <entropyGain>0.5</entropyGain>
+                <prerequisites>
+                    <li>SW_SoulMark</li>
+                </prerequisites>
+                <psychic>False</psychic>
             </li>
-            <!-- need to either depend on the puppet mod or make my own validator -->
-            <!-- <li Class="VPEPuppeteer.AbilityExtension_TargetValidator"> 
-                <ofCasterFaction>True</ofCasterFaction>
-                <allowPrisoners>True</allowPrisoners>
-            </li> -->
+            <li Class="Soulweaver.AbilityExtension_TargetValidator"> 
+                <IsMarked>True</IsMarked>
+            </li>
         </modExtensions>
     </VFECore.Abilities.AbilityDef>
 </Defs>
