@@ -2,7 +2,7 @@
 <Defs>
     <!-- Soul Marked Thought -->
     <ThoughtDef>
-        <defName>SW_SoulMarked</defName>
+        <defName>VS_SoulMarked</defName>
         <durationDays>3</durationDays>
         <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
         <stages>

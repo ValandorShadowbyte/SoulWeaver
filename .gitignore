@@ -42,4 +42,4 @@ Thumbs.db
 Source/SoulWeaver/Plugins
 
 Assemblies/*
-!Assemblies/SoulWeaver.dll
+!Assemblies/SoulSerpent.dll

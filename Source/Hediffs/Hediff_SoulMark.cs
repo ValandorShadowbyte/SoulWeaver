@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace SoulWeaver
+namespace SoulSerpent
 {
     public class Hediff_SoulMark : HediffWithComps
     {
@@ -31,7 +31,7 @@ namespace SoulWeaver
 
             if (master != null)
             {
-                Hediff_Soulweaver soulweaver = SoulWeaverUtils.TryGetHediff<Hediff_Soulweaver>(master, SoulWeaverDefs.SW_Soulweaver);
+                Hediff_Soulweaver soulweaver = SoulSerpentUtils.TryGetHediff<Hediff_Soulweaver>(master, SoulSerpentDefs.VS_Soulweaver);
 
                 if (soulweaver != null)
                 {

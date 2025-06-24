@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
     <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
-        <defName>SW_SoulMark</defName>
+        <defName>VS_SoulMark</defName>
         <label>soul mark</label>
         <description>Mark a target's consciousness with your psychic signature, creating a spiritual link that draws them irresistibly toward joining your faction. This dark art allows you to prepare for future soul transfer abilities through the forbidden technique of consciousness manipulation.</description>
         <iconPath>Abilities/Soulweaver/SoulMark</iconPath>
-        <abilityClass>Soulweaver.Ability_SoulMark</abilityClass>
-        <castSound>SW_Cast</castSound>
+        <abilityClass>SoulSerpent.Ability_SoulMark</abilityClass>
+        <castSound>VS_SoulweaverCast</castSound>
         <targetMode>Pawn</targetMode>
-        <distanceToTarget>1.0</distanceToTarget>
+        <distanceToTarget>1.5</distanceToTarget>
+        <cooldownTime>60000</cooldownTime>
         <needsTicking>true</needsTicking>
         <drawAimPie>false</drawAimPie>
         <goodwillImpact>-10</goodwillImpact>
@@ -23,25 +24,26 @@
         <castTime>100</castTime>
         <modExtensions>
             <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
-                <path>SW_Soulweaver</path>
+                <path>VS_Soulweaver</path>
                 <level>1</level>
                 <order>1</order>
-                <psyfocusCost>0.5</psyfocusCost>
-                <entropyGain>0.5</entropyGain>
+                <psyfocusCost>0.1</psyfocusCost>
+                <entropyGain>0.3</entropyGain>
                 <psychic>False</psychic>
             </li>
         </modExtensions>
     </VFECore.Abilities.AbilityDef>
 
     <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
-        <defName>SW_AwakenedSoulMark</defName>
+        <defName>VS_AwakenedSoulMark</defName>
         <label>awakened soul mark</label>
         <description>An enhanced version of soul marking that creates a deeper, more permanent spiritual connection. This awakened technique allows for greater control over the target's consciousness and provides a stronger foundation for soul manipulation abilities. The mark is more difficult to resist and creates a more profound psychic bond.</description>
         <iconPath>Abilities/Soulweaver/AwakenedSoulMark</iconPath>
-        <abilityClass>Soulweaver.Ability_AwakenedSoulMark</abilityClass>
-        <castSound>SW_Cast</castSound>
+        <abilityClass>SoulSerpent.Ability_AwakenedSoulMark</abilityClass>
+        <castSound>VS_SoulweaverCast</castSound>
         <targetMode>Pawn</targetMode>
-        <distanceToTarget>1.0</distanceToTarget>
+        <distanceToTarget>1.5</distanceToTarget>
+        <cooldownTime>60000</cooldownTime>
         <needsTicking>true</needsTicking>
         <drawAimPie>false</drawAimPie>
         <targetingParameters>
@@ -55,17 +57,17 @@
         <castTime>600</castTime>
         <modExtensions>
             <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
-                <path>SW_Soulweaver</path>
+                <path>VS_Soulweaver</path>
                 <level>2</level>
                 <order>1</order>
                 <psyfocusCost>0.2</psyfocusCost>
                 <entropyGain>0.5</entropyGain>
                 <prerequisites>
-                    <li>SW_SoulMark</li>
+                    <li>VS_SoulMark</li>
                 </prerequisites>
                 <psychic>False</psychic>
             </li>
-            <li Class="Soulweaver.AbilityExtension_TargetValidator"> 
+            <li Class="SoulSerpent.AbilityExtension_TargetValidator"> 
                 <IsMarked>True</IsMarked>
             </li>
         </modExtensions>

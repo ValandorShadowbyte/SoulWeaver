@@ -3,7 +3,7 @@ using RimWorld.Planet;
 using Verse;
 using Ability = VFECore.Abilities.Ability;
 
-namespace SoulWeaver
+namespace SoulSerpent
 {
     public class Ability_AwakenedSoulMark : Ability
     {
@@ -24,41 +24,36 @@ namespace SoulWeaver
         private void ApplyAwakenedSoulMark(Pawn targetPawn)
         {
             // Check if target already has a basic soul mark
-            Hediff existingMark = targetPawn.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("SW_SoulMark"));
+            Hediff existingMark = targetPawn.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("VS_SoulMark"));
             
             if (existingMark != null)
             {
-                // Upgrade existing mark to awakened
+                // Remove the basic mark first
                 targetPawn.health.RemoveHediff(existingMark);
             }
             
             // Apply awakened soul mark hediff
-            Hediff awakenedMark = HediffMaker.MakeHediff(HediffDef.Named("SW_AwakenedSoulMark"), targetPawn);
+            Hediff awakenedMark = HediffMaker.MakeHediff(HediffDef.Named("VS_AwakenedSoulMark"), targetPawn);
             targetPawn.health.AddHediff(awakenedMark);
         }
 
         public override bool ValidateTarget(LocalTargetInfo target, bool throwMessages = false)
         {
-            if (!base.ValidateTarget(target, throwMessages))
-            {
-                return false;
-            }
-
             if (target.Pawn != null)
             {
                 // Check if target is already awakened marked
-                Hediff awakenedMark = target.Pawn.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("SW_AwakenedSoulMark"));
+                Hediff awakenedMark = target.Pawn.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("VS_AwakenedSoulMark"));
                 if (awakenedMark != null)
                 {
                     if (throwMessages)
                     {
-                        Messages.Message("SW.TargetAlreadyAwakenedMarked".Translate(), MessageTypeDefOf.CautionInput);
+                        Messages.Message("Target already has an awakened soul mark.", MessageTypeDefOf.CautionInput);
                     }
                     return false;
                 }
             }
 
-            return true;
+            return base.ValidateTarget(target, throwMessages);
         }
     }
 } 

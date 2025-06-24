@@ -1,12 +1,10 @@
-﻿using RimWorld;
-using UnityEngine;
+﻿using UnityEngine;
 using VanillaPsycastsExpanded;
 using Verse;
-using VFECore;
 
-namespace SoulWeaver
+namespace SoulSerpent
 {
-    public static class SoulWeaverUtils
+    public static class SoulSerpentUtils
     {
         public static T TryAddHediff<T>(Pawn pawn, HediffDef hediffDef, BodyPartRecord bodyPart = null) where T : Hediff
         {

@@ -3,7 +3,7 @@ using Verse;
 using VFECore.Abilities;
 using Ability = VFECore.Abilities.Ability;
 
-namespace SoulWeaver
+namespace SoulSerpent
 {
     public class AbilityExtension_TargetValidator : AbilityExtension_AbilityMod
     {
@@ -27,7 +27,7 @@ namespace SoulWeaver
                 {
                     if (throwMessages)
                     {
-                        Messages.Message("SW.TargetMustBeDown".Translate(), MessageTypeDefOf.CautionInput);
+                        Messages.Message("VS.TargetMustBeDown".Translate(), MessageTypeDefOf.CautionInput);
                     }
 
                     return false;
@@ -37,7 +37,7 @@ namespace SoulWeaver
                 {
                     if (throwMessages)
                     {
-                        Messages.Message("SW.TargetMustBeMarked".Translate(), MessageTypeDefOf.CautionInput);
+                        Messages.Message("VS.TargetMustBeMarked".Translate(), MessageTypeDefOf.CautionInput);
                     }
                 }
 
@@ -45,7 +45,7 @@ namespace SoulWeaver
                 {
                     if (throwMessages)
                     {
-                        Messages.Message("SW.TargetMustBeAdvancedMarked".Translate(), MessageTypeDefOf.CautionInput);
+                        Messages.Message("VS.TargetMustBeAdvancedMarked".Translate(), MessageTypeDefOf.CautionInput);
                     }
 
                     return false;

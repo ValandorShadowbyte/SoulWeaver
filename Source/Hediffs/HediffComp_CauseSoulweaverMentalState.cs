@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace SoulWeaver
+namespace SoulSerpent
 {
     public class HediffCompProperties_CauseSoulweaverMentalState : HediffCompProperties_CauseMentalState
     {

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
     <HediffDef>
-        <defName>SW_Soulweaver</defName>
+        <defName>VS_Soulweaver</defName>
         <label>Soulweaver</label>
         <description>Your consciousness has been awakened to the forbidden art of soul manipulation.</description>
-        <hediffClass>Soulweaver.Hediff_Soulweaver</hediffClass>
+        <hediffClass>SoulSerpent.Hediff_Soulweaver</hediffClass>
         <isBad>False</isBad>
     </HediffDef>
 
     <HediffDef>
-        <defName>SW_SoulMark</defName>
+        <defName>VS_SoulMark</defName>
         <label>soul mark</label>
         <description>A psychic signature has been imprinted on your consciousness, creating a spiritual link to the caster. This mark serves as a foundation for soul manipulation abilities.</description>
-        <hediffClass>Soulweaver.Hediff_SoulMark</hediffClass>
+        <hediffClass>SoulSerpent.Hediff_SoulMark</hediffClass>
         <defaultLabelColor>(0.8, 0.4, 0.8)</defaultLabelColor>
         <isBad>false</isBad>
     </HediffDef>
 
     <HediffDef>
-        <defName>SW_AwakenedSoulMark</defName>
+        <defName>VS_AwakenedSoulMark</defName>
         <label>awakend soul mark</label>
         <description>A deep, permanent spiritual connection has been established. Your consciousness is now bound to the caster through an awakened soul mark, providing a stronger foundation for soul manipulation.</description>
-        <hediffClass>Soulweaver.Hediff_AwakenedSoulMark</hediffClass>
+        <hediffClass>SoulSerpent.Hediff_AwakenedSoulMark</hediffClass>
         <defaultLabelColor>(0.9, 0.3, 0.9)</defaultLabelColor>
         <isBad>false</isBad>
     </HediffDef>
 
     <HediffDef>
-        <defName>SW_MarkResistance</defName>
+        <defName>VS_MarkResistance</defName>
         <label>soul mark resistance</label>
         <description>Your mind is resisting the psychic pressure of the soul mark, causing temporary unconsciousness. When you wake up, the psychic conflict may cause violent outbursts.</description>
-        <hediffClass>Soulweaver.Hediff_MarkResistance</hediffClass>
+        <hediffClass>SoulSerpent.Hediff_MarkResistance</hediffClass>
         <defaultLabelColor>(0.6, 0.6, 0.8)</defaultLabelColor>
         <isBad>false</isBad>
         <initialSeverity>0.7</initialSeverity>
@@ -38,7 +38,7 @@
             <li Class="HediffCompProperties_SeverityPerDay">
                 <severityPerDay>0.1</severityPerDay>
             </li>
-            <li Class="SoulWeaver.HediffCompProperties_CauseSoulweaverMentalState">
+            <li Class="SoulSerpent.HediffCompProperties_CauseSoulweaverMentalState">
                 <overrideLetterLabel>Soul rage: {PAWN_nameDef}</overrideLetterLabel>
                 <overrideLetterDesc>{PAWN_nameDef} can no longer control {PAWN_possessive} anger. The psychic conflict within {PAWN_possessive} soul has become too intense.\n\n{PAWN_nameDef} has flown into a berserk rage!</overrideLetterDesc>
                 <humanMentalState>Berserk</humanMentalState>

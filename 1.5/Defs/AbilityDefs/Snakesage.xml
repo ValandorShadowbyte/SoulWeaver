@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+        <defName>VS_SerpentineTerror</defName>
+        <label>serpentine terror</label>
+        <description>Channel the primal fear of serpents into your target's mind, overwhelming them with visions of slithering shadows and venomous fangs. This ancient technique instills deep psychological terror, causing the target to experience paralyzing fear from the overwhelming serpentine presence invading their consciousness.</description>
+        <iconPath>Abilities/Snakesage/SerpentineTerror</iconPath>
+        <abilityClass>SoulSerpent.Ability_SerpentineTerror</abilityClass>
+        <castSound>VS_SnakesageCast</castSound>
+        <targetMode>Pawn</targetMode>
+        <distanceToTarget>1.5</distanceToTarget>
+        <needsTicking>true</needsTicking>
+        <drawAimPie>false</drawAimPie>
+        <targetingParameters>
+            <canTargetBuildings>False</canTargetBuildings>
+            <canTargetSelf>False</canTargetSelf>
+            <canTargetAnimals>True</canTargetAnimals>
+            <canTargetPawns>True</canTargetPawns>
+            <canTargetHumans>True</canTargetHumans>
+            <canTargetMechs>False</canTargetMechs>
+        </targetingParameters>
+        <castTime>100</castTime>
+        <modExtensions>
+            <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+                <path>VS_Snakesage</path>
+                <level>1</level>
+                <order>1</order>
+                <psyfocusCost>0.1</psyfocusCost>
+                <entropyGain>0.3</entropyGain>
+                <psychic>False</psychic>
+            </li>
+        </modExtensions>
+    </VFECore.Abilities.AbilityDef>
+</Defs>

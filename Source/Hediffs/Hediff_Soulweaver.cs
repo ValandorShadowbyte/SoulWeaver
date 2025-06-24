@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Verse;
 
-namespace SoulWeaver
+namespace SoulSerpent
 {
     public class Hediff_Soulweaver : HediffWithComps
     {

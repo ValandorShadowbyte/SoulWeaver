@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
   <VanillaPsycastsExpanded.PsycasterPathDef>
-    <defName>SW_Soulweaver</defName>
+    <defName>VS_Soulweaver</defName>
     <label>soulweaver</label>
     <description>Soulweaver psycasts focus on transferring consciousness between bodies, allowing you to possess enemies, swap bodies with allies, and achieve immortality through continuous soul transfer.</description>
     <background>UI/Backgrounds/SoulweaverPath</background>
     <altBackground>UI/Backgrounds/SoulweaverPath</altBackground>
     <tab>Psycasts</tab>
     <tooltip>Soulweavers are forbidden psycasters who have mastered the dark art of consciousness transfer. They can possess the bodies of enemies to turn them against their allies, swap consciousness with pawns to escape death, and even create vessels to house their soul when their current body becomes too damaged. These masters of body-hopping are feared for their ability to never truly die, always finding a new host when their current vessel fails them.</tooltip>
+  </VanillaPsycastsExpanded.PsycasterPathDef>
+  <VanillaPsycastsExpanded.PsycasterPathDef>
+    <defName>VS_Snakesage</defName>
+    <label>snakesage</label>
+    <description>Snakesage psycasts harness the power of serpents, allowing you to summon venomous snakes, shed your skin to heal wounds, and strike with deadly precision using snake-like techniques.</description>
+    <background>UI/Backgrounds/SnakesagePath</background>
+    <altBackground>UI/Backgrounds/SnakesagePath</altBackground>
+    <tab>Psycasts</tab>
+    <tooltip>Snakesages are masters of serpentine psycasts who have learned to channel the primal power of snakes. They can summon deadly vipers to attack their enemies, shed their skin to instantly heal grievous wounds, and strike with the speed and precision of a cobra. These practitioners of the forbidden snake arts are feared for their ability to regenerate from seemingly fatal injuries and their mastery of venomous attacks that can paralyze or kill their foes.</tooltip>
   </VanillaPsycastsExpanded.PsycasterPathDef>
 </Defs>

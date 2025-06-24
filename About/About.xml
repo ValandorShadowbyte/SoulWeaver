@@ -1,21 +1,14 @@
 <ModMetaData>
-    <name>Soul Weaver</name>
+    <name>Soul &amp; Serpent</name>
     <author>ValandorShadowbyte</author>
     <supportedVersions>
         <li>1.5</li>
     </supportedVersions>
-    <description>
-    Soul Weaver adds a new forbidden psycasting path to RimWorld that focuses on the dark art of consciousness transfer. 
+    <description>Soul &amp; Serpent adds two powerful and forbidden psycast paths to RimWorld:
 
-    Soulweavers are masters of body-hopping who can:
-    • Possess enemy bodies to turn them against their allies
-    • Swap consciousness with allies to escape death
-    • Create vessels to house their soul when their current body becomes damaged
-    • Achieve immortality through continuous soul transfer
+Soulweaver: Masters of consciousness transfer who can possess enemies, swap bodies with allies, and achieve immortality through continuous soul transfer. These dark practitioners are feared for their ability to never truly die, always finding a new host when their current vessel fails them.
 
-    These forbidden psycasters are feared for their ability to never truly die, always finding a new host when their current vessel fails them. The Soul Weaver path offers unique gameplay mechanics centered around consciousness manipulation and body possession.
-
-    Requires Vanilla Psycasts Expanded to function.
+Snakesage: Practitioners of serpentine psycasts who channel the primal power of snakes. They can summon deadly vipers, shed their skin to heal grievous wounds, and strike with the speed and precision of a cobra. These masters of the forbidden snake arts are feared for their regenerative abilities and mastery of venomous attacks.
     </description>
     <modDependencies>
         <li>
@@ -30,7 +23,7 @@
             <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2842502659</steamWorkshopUrl>
         </li>
     </modDependencies>
-    <packageId>ValandorShadowbyte.SoulWeaver</packageId>
+    <packageId>ValandorShadowbyte.SoulSerpent</packageId>
     <loadAfter>
         <li>brrainz.harmony</li>
         <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
