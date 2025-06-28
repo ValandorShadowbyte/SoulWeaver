@@ -1,0 +1,17 @@
+---
+description: **Use this rule when:** - Adding new XML definitions (abilities, thoughts, hediffs, sounds) - Creating new game elements that need XML configuration - Organizing mod content in the correct directory structure - Locating existing definitions for reference or modification - Understanding where different types of mod content should be placed - Working with RimWorld mod file organization
+globs: 
+alwaysApply: false
+---
+# Project Structure Rules
+
+## XML Definition Locations
+
+- **Ability definitions**: [1.5/Defs/AbilityDefs/](mdc:1.5/Defs/AbilityDefs) (e.g., [Soulweaver.xml](mdc:1.5/Defs/AbilityDefs/Soulweaver.xml))
+- **Thought definitions**: [1.5/Defs/ThoughtDefs/](mdc:1.5/Defs/ThoughtDefs) (e.g., [Soulweaver.xml](mdc:1.5/Defs/ThoughtDefs/Soulweaver.xml))
+- **Hediff definitions**: [1.5/Defs/HediffDefs/](mdc:1.5/Defs/HediffDefs) (e.g., [Soulweaver.xml](mdc:1.5/Defs/HediffDefs/Soulweaver.xml))
+- **Sound definitions**: [1.5/Defs/SoundDefs/](mdc:1.5/Defs/SoundDefs)
+- **Language keys**: [Languages/English/Keyed/](mdc:Languages/English/Keyed) (e.g., [Keys.xml](mdc:Languages/English/Keyed/Keys.xml))
+
+
+

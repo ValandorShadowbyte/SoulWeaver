@@ -1,0 +1,33 @@
+---
+description: **Use this rule when:** - Creating new abilities, hediffs, or other game elements that need icons/textures - Adding sound effects or audio to abilities - Organizing or placing assets in the correct directories - Updating XML definitions to reference asset paths - Working with textures, sounds, or other media files - Ensuring proper file organization for mod assets
+globs: 
+alwaysApply: false
+---
+# Asset Management Rules
+
+## Icon and Texture Requirements
+
+- **Create placeholder files** for required icons/textures
+- **Note the expected file format and dimensions** in comments
+- **Place assets in the correct directory structure**:
+  - Abilities: [Textures/Abilities/Soulweaver/](mdc:Textures/Abilities/Soulweaver) or [Textures/Abilities/Snakesage/](mdc:Textures/Abilities/Snakesage)
+  - UI: [Textures/UI/](mdc:Textures/UI)
+- **Update XML definitions** to reference the correct icon paths
+
+## Sound and Audio
+
+- **Reference existing sound definitions** when possible
+- **Create new sound definitions** in [1.5/Defs/SoundDefs/SoulSerpent.xml](mdc:1.5/Defs/SoundDefs/SoulSerpent.xml) if needed
+- **Place audio files** in the [Sounds/](mdc:Sounds) directory
+- **Use existing sound files** like [Soulweaver_Cast.ogg](mdc:Sounds/Soulweaver_Cast.ogg) when appropriate
+
+## File Organization
+
+Follow the existing asset organization:
+- **Textures**: [Textures/](mdc:Textures) directory with subdirectories for different types
+- **Sounds**: [Sounds/](mdc:Sounds) directory
+- **Icons**: [About/](mdc:About) directory for mod icons like [ModIcon.png](mdc:About/ModIcon.png)
+
+
+
+

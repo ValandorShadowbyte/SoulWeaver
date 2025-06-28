@@ -12,11 +12,7 @@ namespace SoulSerpent
             // Apply temporary resistance effects
             if (pawn != null)
             {
-                if (pawn.needs?.mood?.thoughts?.memories != null)
-                {
-                    Thought_Memory thought = (Thought_Memory) ThoughtMaker.MakeThought(ThoughtDef.Named("VS_SoulMarked"));
-                    pawn.needs.mood.thoughts.memories.TryGainMemory(thought);
-                }
+                SoulSerpentUtils.TryAddThought(pawn, SoulSerpentDefs.VS_SoulMarked);
             }
         }
 

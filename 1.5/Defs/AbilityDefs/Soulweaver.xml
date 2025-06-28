@@ -10,7 +10,7 @@
         <targetMode>Pawn</targetMode>
         <distanceToTarget>1.5</distanceToTarget>
         <cooldownTime>60000</cooldownTime>
-        <needsTicking>true</needsTicking>
+        <needsTicking>false</needsTicking>
         <drawAimPie>false</drawAimPie>
         <goodwillImpact>-10</goodwillImpact>
         <targetingParameters>
@@ -35,6 +35,47 @@
     </VFECore.Abilities.AbilityDef>
 
     <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+        <defName>VS_SoulPressure</defName>
+        <label>soul pressure</label>
+        <description>Exert psychic pressure on a soul-marked target, causing intense mental strain and psychological distress that can down them. This ability leverages the existing spiritual connection to overwhelm the target's consciousness with unbearable psychic force. The established soul link makes this ability much more efficient and cost-effective than direct psychic attacks, allowing for near-instant application of psychic pressure.</description>
+        <iconPath>Abilities/Soulweaver/SoulPressure</iconPath>
+        <abilityClass>SoulSerpent.Ability_SoulPressure</abilityClass>
+        <castSound>VS_SoulweaverCast</castSound>
+        <targetMode>Pawn</targetMode>
+        <range>15</range>
+        <distanceToTarget>15</distanceToTarget>
+        <needsTicking>false</needsTicking>
+        <drawAimPie>false</drawAimPie>
+        <targetingParameters>
+            <canTargetBuildings>False</canTargetBuildings>
+            <canTargetSelf>False</canTargetSelf>
+            <canTargetAnimals>False</canTargetAnimals>
+            <canTargetPawns>True</canTargetPawns>
+            <canTargetHumans>True</canTargetHumans>
+            <canTargetMechs>False</canTargetMechs>
+        </targetingParameters>
+        <castTime>10</castTime>
+        <modExtensions>
+            <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+                <path>VS_Soulweaver</path>
+                <level>2</level>
+                <order>1</order>
+                <psyfocusCost>0.02</psyfocusCost>
+                <entropyGain>0</entropyGain>
+                <prerequisites>
+                    <li>VS_SoulMark</li>
+                </prerequisites>
+                <psychic>False</psychic>
+            </li>
+            <li Class="SoulSerpent.AbilityExtension_TargetValidator"> 
+                <IsMarked>True</IsMarked>
+                <NotResistingSoulMark>True</NotResistingSoulMark>
+                <NotDown>True</NotDown>
+            </li>
+        </modExtensions>
+    </VFECore.Abilities.AbilityDef>
+
+    <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
         <defName>VS_AwakenedSoulMark</defName>
         <label>awakened soul mark</label>
         <description>An enhanced version of soul marking that creates a deeper, more permanent spiritual connection. This awakened technique allows for greater control over the target's consciousness and provides a stronger foundation for soul manipulation abilities. The mark is more difficult to resist and creates a more profound psychic bond.</description>
@@ -44,7 +85,7 @@
         <targetMode>Pawn</targetMode>
         <distanceToTarget>1.5</distanceToTarget>
         <cooldownTime>60000</cooldownTime>
-        <needsTicking>true</needsTicking>
+        <needsTicking>false</needsTicking>
         <drawAimPie>false</drawAimPie>
         <targetingParameters>
             <canTargetBuildings>False</canTargetBuildings>
@@ -58,7 +99,7 @@
         <modExtensions>
             <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
                 <path>VS_Soulweaver</path>
-                <level>2</level>
+                <level>3</level>
                 <order>1</order>
                 <psyfocusCost>0.2</psyfocusCost>
                 <entropyGain>0.5</entropyGain>

@@ -13,4 +13,18 @@
             </li>
         </stages>
     </ThoughtDef>
+
+    <!-- Soul Pressure Thought -->
+    <ThoughtDef>
+        <defName>VS_SoulPressureThought</defName>
+        <durationDays>1</durationDays>
+        <stackLimitForSameOtherPawn>1</stackLimitForSameOtherPawn>
+        <stages>
+            <li>
+                <label>soul pressure</label>
+                <description>I can feel an overwhelming psychic pressure crushing down on my consciousness. The soul mark is being used against me, and the mental strain is almost unbearable.</description>
+                <baseMoodEffect>-30</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
 </Defs> 

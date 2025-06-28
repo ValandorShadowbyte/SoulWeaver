@@ -34,10 +34,12 @@
     <Compile Include="Abilities\Ability_AwakenedSoulMark.cs" />
     <Compile Include="Abilities\Ability_SerpentineTerror.cs" />
     <Compile Include="Abilities\Ability_SoulMark.cs" />
+    <Compile Include="Abilities\Ability_SoulPressure.cs" />
     <Compile Include="AbilityExtension_TargetValidator.cs" />
     <Compile Include="Hediffs\Hediff_AwakenedSoulMark.cs" />
     <Compile Include="Hediffs\Hediff_MarkResistance.cs" />
     <Compile Include="Hediffs\Hediff_SoulMark.cs" />
+    <Compile Include="Hediffs\Hediff_SoulPressure.cs" />
     <Compile Include="Hediffs\Hediff_Soulweaver.cs" />
     <Compile Include="SoulSerpentDefs.cs" />
     <Compile Include="SoulSerpentMod.cs" />

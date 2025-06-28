@@ -1,0 +1,37 @@
+---
+description: **Use this rule when:** - Creating or modifying XML definitions for game elements - Adding user-facing text, labels, or descriptions - Working with translation keys and localization - Writing descriptions for abilities, hediffs, or other game content - Ensuring consistent terminology and lore across the mod - Adding validation messages or UI text that needs translation - Maintaining proper XML structure and naming conventions
+globs: 
+alwaysApply: false
+---
+# XML and Localization Rules
+
+## XML Definition Rules
+
+Follow the existing XML structure and naming conventions:
+
+- **Ability definitions**: Add to [1.5/Defs/AbilityDefs/Soulweaver.xml](mdc:1.5/Defs/AbilityDefs/Soulweaver.xml)
+- **Thought definitions**: Add to [1.5/Defs/ThoughtDefs/Soulweaver.xml](mdc:1.5/Defs/ThoughtDefs/Soulweaver.xml)
+- **Hediff definitions**: Add to [1.5/Defs/HediffDefs/Soulweaver.xml](mdc:1.5/Defs/HediffDefs/Soulweaver.xml)
+- **Sound definitions**: Add to [1.5/Defs/SoundDefs/SoulSerpent.xml](mdc:1.5/Defs/SoundDefs/SoulSerpent.xml)
+
+Ensure proper prerequisites and level progression in psycast paths.
+
+## Language Key Management
+
+**ALWAYS update language keys** when adding or changing validation messages, UI text, or any user-facing strings.
+
+- **Use the "VS." prefix** for all translation keys to maintain consistency
+- **Add new keys** to [Languages/English/Keyed/Keys.xml](mdc:Languages/English/Keyed/Keys.xml)
+- **Update existing keys** when changing message content
+- **Ensure translation keys match exactly** with the language file
+
+## XML Documentation
+
+- Provide clear, descriptive labels and descriptions
+- Use consistent terminology across the mod
+- Explain the lore and mechanics of new abilities
+- Ensure descriptions match the actual implementation
+
+
+
+

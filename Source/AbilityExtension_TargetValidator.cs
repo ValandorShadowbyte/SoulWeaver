@@ -8,8 +8,10 @@ namespace SoulSerpent
     public class AbilityExtension_TargetValidator : AbilityExtension_AbilityMod
     {
         public bool IsDown;
+        public bool NotDown;
         public bool IsMarked;
         public bool IsAdvancedMarked;
+        public bool NotResistingSoulMark;
 
         public HediffDef requiredHediffOnTarget;
 
@@ -33,19 +35,41 @@ namespace SoulSerpent
                     return false;
                 }
 
-                if (IsMarked)
+                if (NotDown && target.Pawn.Downed)
+                {
+                    if (throwMessages)
+                    {
+                        Messages.Message("VS.TargetMustNotBeDown".Translate(), MessageTypeDefOf.CautionInput);
+                    }
+
+                    return false;
+                }
+
+                if (IsMarked && !SoulSerpentUtils.HasSoulMark(target.Pawn))
                 {
                     if (throwMessages)
                     {
                         Messages.Message("VS.TargetMustBeMarked".Translate(), MessageTypeDefOf.CautionInput);
                     }
+
+                    return false;
                 }
 
-                if (IsAdvancedMarked)
+                if (IsAdvancedMarked && !SoulSerpentUtils.HasAwakenedSoulMark(target.Pawn))
                 {
                     if (throwMessages)
                     {
                         Messages.Message("VS.TargetMustBeAdvancedMarked".Translate(), MessageTypeDefOf.CautionInput);
+                    }
+
+                    return false;
+                }
+
+                if (NotResistingSoulMark && SoulSerpentUtils.IsResistingSoulMark(target.Pawn))
+                {
+                    if (throwMessages)
+                    {
+                        Messages.Message("VS.TargetMustNotBeResisting".Translate(), MessageTypeDefOf.CautionInput);
                     }
 
                     return false;

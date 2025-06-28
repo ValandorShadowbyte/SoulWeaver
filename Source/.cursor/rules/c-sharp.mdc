@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# C# Critical Rules for Source Directory
+
+## ALWAYS Apply These Rules When Working with C# Files
+
+**ABSOLUTELY CRITICAL**: These rules MUST be followed for ANY C# development in this Source directory.
+
+### 1. ALWAYS Add New C# Files to Project File
+
+**CRITICAL**: When creating ANY new `.cs` file, you MUST add it to the project file ([SoulSerpent.csproj](mdc:SoulSerpent.csproj)) in the `<Compile Include="...">` section.
+
+**This is the #1 most important rule** - without this, new classes won't be compiled into the mod's assembly.
+
+**Check the project file FIRST** before creating any new C# files to see the existing pattern.
+
+**Examples**:
+- Hediffs: `<Compile Include="Hediffs\Hediff_SoulPressure.cs" />`
+- Abilities: `<Compile Include="Abilities\Ability_NewAbility.cs" />`
+- Utilities: `<Compile Include="NewUtility.cs" />`
+
+**If you forget this rule, the mod will not work properly!**
+
+### 2. ALWAYS Use Mod-Specific Utility Methods
+
+**NEVER manually create hediffs** with `HediffMaker.MakeHediff()` - always use [SoulSerpentUtils.cs](mdc:SoulSerpentUtils.cs) methods:
+
+- `SoulSerpentUtils.TryAddHediff<T>()` for adding hediffs
+- `SoulSerpentUtils.TryGetHediff<T>()` for checking/retrieving hediffs
+- `SoulSerpentUtils.TryAddThought()` for adding thoughts
+- `SoulSerpentUtils.TryRemoveThought()` for removing thoughts
+
+**Correct usage example**:
+```csharp
+Hediff_Soulweaver soulWeaver = SoulSerpentUtils.TryAddHediff<Hediff_Soulweaver>(pawn, SoulSerpentDefs.VS_Soulweaver);
+```
+
+### 3. ALWAYS Reference Definitions from SoulSerpentDefs
+
+**NEVER hardcode definition names** - always reference from [SoulSerpentDefs.cs](mdc:SoulSerpentDefs.cs):
+
+```csharp
+// CORRECT
+SoulSerpentDefs.VS_SoulMark
+SoulSerpentDefs.VS_SoulPressureThought
+
+// WRONG
+"VS_SoulMark"
+"VS_SoulPressureThought"
+```
+
+### 4. ALWAYS Follow Existing Patterns
+
+**Examine similar existing classes** before creating new ones:
+- Abilities: See [Abilities/Ability_SoulMark.cs](mdc:Abilities/Ability_SoulMark.cs)
+- Hediffs: See [Hediffs/Hediff_SoulMark.cs](mdc:Hediffs/Hediff_SoulMark.cs)
+- Utilities: See [SoulSerpentUtils.cs](mdc:SoulSerpentUtils.cs)
+
+Use the same base classes and inheritance structure as existing implementations.
+
+### 5. ALWAYS Follow File Organization
+
+**Place files in the correct directories**:
+- **Ability classes**: Place in [Abilities/](mdc:Abilities) directory
+- **Hediff classes**: Place in [Hediffs/](mdc:Hediffs) directory  
+- **Utility classes**: Place in Source root directory
+
+**Follow naming conventions**:
+- Ability classes: `Ability_ClassName.cs` (e.g., [Abilities/Ability_SoulMark.cs](mdc:Abilities/Ability_SoulMark.cs))
+- Hediff classes: `Hediff_ClassName.cs` (e.g., [Hediffs/Hediff_SoulMark.cs](mdc:Hediffs/Hediff_SoulMark.cs))
+- Utility classes: `ClassName.cs` (e.g., [SoulSerpentUtils.cs](mdc:SoulSerpentUtils.cs))
+
+### 6. ALWAYS Handle Errors and Add Comments
+
+**Error Handling**:
+- Use try-catch blocks where appropriate
+- Provide meaningful error messages
+- Handle null references gracefully
+- Validate inputs before processing
+
+**Code Comments**:
+- Add comments explaining complex logic
+- Document the purpose of new abilities and their effects
+- Explain any non-obvious implementation details
+- Reference related classes and dependencies
+
+### 7. ALWAYS Update Language Keys in C# Code
+
+**When adding validation messages or UI text in C#**:
+- **Use the "VS." prefix** for all translation keys
+- **Ensure translation keys in code match exactly** with the language file
+- **Example**:
+```csharp
+Messages.Message("VS.TargetMustNotBeResisting".Translate(), MessageTypeDefOf.CautionInput);
+```
+
+**These rules apply to ALL C# development in this Source directory - no exceptions!**
+
+

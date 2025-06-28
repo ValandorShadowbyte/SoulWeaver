@@ -91,7 +91,7 @@
                 <overrideLetterDesc>{PAWN_nameDef} can no longer control {PAWN_possessive} anger. The psychic conflict within {PAWN_possessive} soul has become too intense.\n\n{PAWN_nameDef} has flown into a berserk rage!</overrideLetterDesc>
                 <humanMentalState>Berserk</humanMentalState>
                 <minSeverity>0.25</minSeverity>
-                <mtbDaysToCauseMentalState>0.5</mtbDaysToCauseMentalState>
+                <mtbDaysToCauseMentalState>0.1</mtbDaysToCauseMentalState>
                 <forced>true</forced>
             </li>
         </comps>
@@ -160,6 +160,33 @@
                 <label>inital shock</label>
                 <minSeverity>0.29</minSeverity>
                 <painOffset>0.05</painOffset>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <setMax>0.1</setMax>
+                    </li>
+                </capMods>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <HediffDef>
+        <defName>VS_SoulPressure</defName>
+        <label>soul pressure</label>
+        <description>Intense psychic pressure is being exerted on your consciousness through the soul mark connection. This overwhelming force causes mental strain and psychological distress.</description>
+        <hediffClass>SoulSerpent.Hediff_SoulPressure</hediffClass>
+        <defaultLabelColor>(0.7, 0.2, 0.7)</defaultLabelColor>
+        <isBad>true</isBad>
+        <initialSeverity>0.5</initialSeverity>
+        <comps>
+            <li Class="HediffCompProperties_SeverityPerDay">
+                <severityPerDay>-4</severityPerDay>
+                <showHoursToRecover>true</showHoursToRecover>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <painOffset>0.5</painOffset>
                 <capMods>
                     <li>
                         <capacity>Consciousness</capacity>
