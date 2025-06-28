@@ -225,4 +225,97 @@
             </li>
         </stages>
     </HediffDef>
+
+    <HediffDef>
+        <defName>VS_BodyDecay</defName>
+        <label>body decay</label>
+        <description>this should be set by the C# class, if you can see it something is wrong with the mod</description>
+        <hediffClass>SoulSerpent.Hediff_BodyDecay</hediffClass>
+        <defaultLabelColor>(0.4, 0.2, 0.1)</defaultLabelColor>
+        <isBad>true</isBad>
+        <initialSeverity>0.1</initialSeverity>
+        <comps>
+            <li Class="HediffCompProperties_SeverityPerDay">
+                <severityPerDay>0.015</severityPerDay>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <label>minor decay</label>
+                <minSeverity>0</minSeverity>
+            </li>
+            <li>
+                <label>moderate decay</label>
+                <minSeverity>0.3</minSeverity>
+                <painOffset>0.05</painOffset>
+            </li>
+            <li>
+                <label>severe decay</label>
+                <minSeverity>0.7</minSeverity>
+                <painOffset>0.15</painOffset>
+                <capMods>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <setMax>0.9</setMax>
+                    </li>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <setMax>0.95</setMax>
+                    </li>
+                </capMods>
+            </li>
+            <li>
+                <label>extreme decay</label>
+                <minSeverity>0.9</minSeverity>
+                <painOffset>0.3</painOffset>
+                <vomitMtbDays>0.125</vomitMtbDays>
+                <capMods>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <setMax>0.5</setMax>
+                    </li>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <setMax>0.8</setMax>
+                    </li>
+                    <li>
+                        <capacity>Breathing</capacity>
+                        <setMax>0.8</setMax>
+                    </li>
+                    <li>
+                        <capacity>BloodFiltration</capacity>
+                        <setMax>0.8</setMax>
+                    </li>
+                </capMods>
+            </li>
+            <li>
+                <label>complete decay</label>
+                <minSeverity>.95</minSeverity>
+                <painOffset>0.5</painOffset>
+                <vomitMtbDays>0.125</vomitMtbDays>
+                <capMods>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <setMax>0.2</setMax>
+                    </li>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <setMax>0.6</setMax>
+                    </li>
+                    <li>
+                        <capacity>Breathing</capacity>
+                        <setMax>0.7</setMax>
+                    </li>
+                    <li>
+                        <capacity>BloodFiltration</capacity>
+                        <setMax>0.7</setMax>
+                    </li>
+                </capMods>
+            </li>
+            <li>
+                <label>vessel death</label>
+                <minSeverity>1</minSeverity>
+            </li>
+        </stages>
+    </HediffDef>
 </Defs>

@@ -37,6 +37,7 @@
     <Compile Include="Abilities\Ability_SoulPressure.cs" />
     <Compile Include="AbilityExtension_TargetValidator.cs" />
     <Compile Include="Hediffs\Hediff_AwakenedSoulMark.cs" />
+    <Compile Include="Hediffs\Hediff_BodyDecay.cs" />
     <Compile Include="Hediffs\Hediff_MarkResistance.cs" />
     <Compile Include="Hediffs\Hediff_SoulMark.cs" />
     <Compile Include="Hediffs\Hediff_SoulPressure.cs" />
