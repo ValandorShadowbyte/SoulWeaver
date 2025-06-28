@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using RimWorld;
 using VanillaPsycastsExpanded;
 using Verse;
-using System.Linq;
+using VFECore.Abilities;
+using PsycastUtility = VanillaPsycastsExpanded.PsycastUtility;
+
 
 namespace SoulSerpent
 {
@@ -19,6 +22,11 @@ namespace SoulSerpent
             return hediff;
         }
 
+        public static T TryAddHediff<T>(Pawn pawn, T hediff) where T : Hediff
+        {
+            return TryAddHediff<T>(pawn, hediff.def);
+        }
+
         public static T TryGetHediff<T>(Pawn pawn, HediffDef hediffDef) where T : Hediff
         {
             if (pawn.health.hediffSet.GetFirstHediffOfDef(hediffDef) is T hediff)
@@ -27,6 +35,14 @@ namespace SoulSerpent
             }
 
             return null;
+        }
+
+        public static void TryRemoveHediff(Pawn pawn, Hediff hediff)
+        {
+            if (pawn != null && hediff != null)
+            {
+                pawn.health.RemoveHediff(hediff);
+            }
         }
 
         /// <summary>
@@ -104,7 +120,7 @@ namespace SoulSerpent
         /// <returns>True if the pawn has mark resistance</returns>
         public static bool IsResistingSoulMark(Pawn pawn)
         {
-            return TryGetHediff<Hediff_MarkResistance>(pawn, SoulSerpentDefs.VS_MarkResistance) != null;
+            return TryGetHediff<Hediff>(pawn, SoulSerpentDefs.VS_MarkResistance) != null;
         }
 
         /// <summary>
@@ -115,6 +131,44 @@ namespace SoulSerpent
         public static bool HasSoulMarkAwakening(Pawn pawn)
         {
             return TryGetHediff<Hediff>(pawn, SoulSerpentDefs.VS_SoulMarkAwakening) != null;
+        }
+
+        public static void CopyPsylink(Pawn source, Pawn dest)
+        {
+            var sourcePsylink = PawnUtility.GetMainPsylinkSource(source);
+            var sourceAbilities = PsycastUtility.Psycasts(source);
+
+            dest.health.hediffSet.hediffs.Add(sourcePsylink);
+            dest.health.hediffSet.hediffs.Add(sourceAbilities);
+            dest.psychicEntropy.OffsetPsyfocusDirectly(source.psychicEntropy.CurrentPsyfocus);
+            dest.psychicEntropy.TryAddEntropy(source.psychicEntropy.EntropyValue);
+            dest.psychicEntropy.SetPsyfocusTarget(source.psychicEntropy.TargetPsyfocus);
+            dest.psychicEntropy.limitEntropyAmount = source.psychicEntropy.limitEntropyAmount;
+
+            foreach (var ability in source.GetComp<CompAbilities>().LearnedAbilities.ToList())
+            {
+                if (ability.def.GetModExtension<AbilityExtension_Psycast>() != null)
+                {
+                    dest.GetComp<CompAbilities>().GiveAbility(ability.def);
+                }
+            }
+
+            PawnComponentsUtility.AddAndRemoveDynamicComponents(dest, false);
+        }
+
+        public static void MergeBestTraitsFromDest(Pawn source, Pawn dest)
+        {
+
+        }
+
+        public static void CopyBackstory(Pawn source, Pawn dest)
+        {
+
+        }
+
+        public static void CopySkills(Pawn source, Pawn dest)
+        {
+
         }
     }
 }

@@ -47,9 +47,6 @@ namespace SoulSerpent
             Hediff_AwakenedSoulMark awakenedMark = SoulSerpentUtils.TryAddHediff<Hediff_AwakenedSoulMark>(targetPawn, SoulSerpentDefs.VS_AwakenedSoulMark);
             awakenedMark.master = pawn;
 
-            // Remove the basic soul marked thought
-            SoulSerpentUtils.TryRemoveThought(targetPawn, SoulSerpentDefs.VS_SoulMarked);
-
             // Apply soul mark awakening effect (temporary consciousness reduction)
             SoulSerpentUtils.TryAddHediff<HediffWithComps>(targetPawn, SoulSerpentDefs.VS_SoulMarkAwakening);
         }

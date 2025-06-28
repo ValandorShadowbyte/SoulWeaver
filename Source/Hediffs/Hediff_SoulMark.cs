@@ -38,6 +38,8 @@ namespace SoulSerpent
                     soulweaver.markedPawns.Remove(pawn);
                 }
             }
+
+            SoulSerpentUtils.TryRemoveThought(pawn, SoulSerpentDefs.VS_SoulMarked);
         }
     }
 }

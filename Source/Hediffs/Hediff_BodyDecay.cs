@@ -40,15 +40,18 @@ namespace SoulSerpent
                 }
             }
         }
+
         public override void Tick()
         {
             if (Severity >= 1)
             {
+                //try and transfer the soulweaver to a marked pawn
+                var soulWeaver = SoulSerpentUtils.TryGetHediff<Hediff_Soulweaver>(pawn, SoulSerpentDefs.VS_Soulweaver);
+                soulWeaver?.TransferToBestTarget();
+
+                //kill the orginal host body into a cloud of ash
                 var pawnLabel = pawn.LabelIndefinite();
                 pawn.Kill(null);
-
-                //TODO: try and transfer
-
                 var corpse = pawn.Corpse;
                 FilthMaker.TryMakeFilth(corpse.Position, corpse.Map, ThingDefOf.Filth_Ash, pawnLabel, 5);
                 corpse.Destroy(DestroyMode.Vanish);
