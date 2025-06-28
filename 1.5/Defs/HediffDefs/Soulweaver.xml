@@ -15,6 +15,28 @@
         <hediffClass>SoulSerpent.Hediff_SoulMark</hediffClass>
         <defaultLabelColor>(0.8, 0.4, 0.8)</defaultLabelColor>
         <isBad>false</isBad>
+        <stages>
+            <li>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <offset>0.2</offset>
+                    </li>
+                    <li>
+                        <capacity>Breathing</capacity>
+                        <offset>0.1</offset>
+                    </li>
+                </capMods>
+                <statOffsets>
+                    <MoveSpeed>1</MoveSpeed>
+                    <MeleeDamageFactor>1.25</MeleeDamageFactor>
+                </statOffsets>
+                <statFactors>
+                    <MeleeCooldownFactor>.9</MeleeCooldownFactor>
+                </statFactors>
+                <painOffset>-0.15</painOffset>
+            </li>
+        </stages>
     </HediffDef>
 
     <HediffDef>
@@ -24,6 +46,31 @@
         <hediffClass>SoulSerpent.Hediff_AwakenedSoulMark</hediffClass>
         <defaultLabelColor>(0.9, 0.3, 0.9)</defaultLabelColor>
         <isBad>false</isBad>
+        <stages>
+            <li>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <offset>0.2</offset>
+                    </li>
+                    <li>
+                        <capacity>Breathing</capacity>
+                        <offset>0.1</offset>
+                    </li>
+                </capMods>
+                <statOffsets>
+                    <MoveSpeed>1.5</MoveSpeed>
+                    <MeleeDamageFactor>1.4</MeleeDamageFactor>
+                </statOffsets>
+                <statFactors>
+                    <MeleeCooldownFactor>.7</MeleeCooldownFactor>
+                    <InjuryHealingFactor>1.3</InjuryHealingFactor>
+                    <IncomingDamageFactor>0.7</IncomingDamageFactor>
+                    <CertaintyLossFactor MayRequire="Ludeon.RimWorld.Ideology">0.1</CertaintyLossFactor>
+                </statFactors>
+                <painOffset>-0.30</painOffset>
+            </li>
+        </stages>
     </HediffDef>
 
     <HediffDef>
@@ -33,35 +80,62 @@
         <hediffClass>SoulSerpent.Hediff_MarkResistance</hediffClass>
         <defaultLabelColor>(0.6, 0.6, 0.8)</defaultLabelColor>
         <isBad>false</isBad>
-        <initialSeverity>0.7</initialSeverity>
+        <initialSeverity>0.3</initialSeverity>
         <comps>
             <li Class="HediffCompProperties_SeverityPerDay">
-                <severityPerDay>0.1</severityPerDay>
+                <severityPerDay>-0.1</severityPerDay>
+                <showHoursToRecover>true</showHoursToRecover>
             </li>
-            <li Class="SoulSerpent.HediffCompProperties_CauseSoulweaverMentalState">
+            <li Class="HediffCompProperties_CauseMentalState">
                 <overrideLetterLabel>Soul rage: {PAWN_nameDef}</overrideLetterLabel>
                 <overrideLetterDesc>{PAWN_nameDef} can no longer control {PAWN_possessive} anger. The psychic conflict within {PAWN_possessive} soul has become too intense.\n\n{PAWN_nameDef} has flown into a berserk rage!</overrideLetterDesc>
                 <humanMentalState>Berserk</humanMentalState>
-                <mtbDaysToCauseMentalState>0.04</mtbDaysToCauseMentalState>
-                <minSeverity>0.70</minSeverity>
-                <maxSeverity>0.75</maxSeverity>
+                <minSeverity>0.25</minSeverity>
+                <mtbDaysToCauseMentalState>0.5</mtbDaysToCauseMentalState>
                 <forced>true</forced>
             </li>
         </comps>
         <stages>
             <li>
-                <label>inital shock</label>
+                <label>minor resistance</label>
+                <minSeverity>0</minSeverity>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <offset>-0.1</offset>
+                    </li>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <offset>-0.1</offset>
+                    </li>
+                    <li>
+                        <capacity>Breathing</capacity>
+                        <offset>-0.1</offset>
+                    </li>
+                </capMods>
+            </li>
+            <li>
+                <label>resistance</label>
+                <minSeverity>0.1</minSeverity>
                 <painOffset>0.05</painOffset>
                 <capMods>
                     <li>
                         <capacity>Consciousness</capacity>
-                        <setMax>0.1</setMax>
+                        <offset>-0.25</offset>
+                    </li>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <offset>-0.25</offset>
+                    </li>
+                    <li>
+                        <capacity>Breathing</capacity>
+                        <offset>-0.25</offset>
                     </li>
                 </capMods>
             </li>
             <li>
                 <label>major resistance</label>
-                <minSeverity>0.71</minSeverity>
+                <minSeverity>0.2</minSeverity>
                 <painOffset>0.05</painOffset>
                 <statFactors>
                     <ResearchSpeed>0</ResearchSpeed>
@@ -83,39 +157,13 @@
                 </capMods>
             </li>
             <li>
-                <label>resistance</label>
-                <minSeverity>0.8</minSeverity>
+                <label>inital shock</label>
+                <minSeverity>0.29</minSeverity>
                 <painOffset>0.05</painOffset>
                 <capMods>
                     <li>
                         <capacity>Consciousness</capacity>
-                        <offset>-0.05</offset>
-                    </li>
-                    <li>
-                        <capacity>Manipulation</capacity>
-                        <offset>-0.05</offset>
-                    </li>
-                    <li>
-                        <capacity>Breathing</capacity>
-                        <offset>-0.1</offset>
-                    </li>
-                </capMods>
-            </li>
-            <li>
-                <label>minor resistance</label>
-                <minSeverity>0.9</minSeverity>
-                <capMods>
-                    <li>
-                        <capacity>Consciousness</capacity>
-                        <offset>-0.05</offset>
-                    </li>
-                    <li>
-                        <capacity>Manipulation</capacity>
-                        <offset>-0.05</offset>
-                    </li>
-                    <li>
-                        <capacity>Breathing</capacity>
-                        <offset>-0.1</offset>
+                        <setMax>0.1</setMax>
                     </li>
                 </capMods>
             </li>

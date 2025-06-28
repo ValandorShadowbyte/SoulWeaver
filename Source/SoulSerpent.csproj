@@ -35,7 +35,6 @@
     <Compile Include="Abilities\Ability_SerpentineTerror.cs" />
     <Compile Include="Abilities\Ability_SoulMark.cs" />
     <Compile Include="AbilityExtension_TargetValidator.cs" />
-    <Compile Include="Hediffs\HediffComp_CauseSoulweaverMentalState.cs" />
     <Compile Include="Hediffs\Hediff_AwakenedSoulMark.cs" />
     <Compile Include="Hediffs\Hediff_MarkResistance.cs" />
     <Compile Include="Hediffs\Hediff_SoulMark.cs" />

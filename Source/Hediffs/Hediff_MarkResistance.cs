@@ -8,7 +8,7 @@ namespace SoulSerpent
         public override void PostAdd(DamageInfo? dinfo)
         {
             base.PostAdd(dinfo);
-            
+
             // Apply temporary resistance effects
             if (pawn != null)
             {
@@ -36,7 +36,7 @@ namespace SoulSerpent
                 }
             }
 
-            if ((double) Severity < 0.9)
+            if (Severity > 0.1)
                 return;
 
             if (pawn.guest != null && pawn.Faction != Faction.OfPlayer)
@@ -56,6 +56,11 @@ namespace SoulSerpent
             {
                 pawn.guest.SetGuestStatus(null, 0);
                 pawn.guest.Released = true;
+            }
+
+            if (ModLister.IdeologyInstalled)
+            {
+                pawn.ideo.SetIdeo(Faction.OfPlayer.ideos.PrimaryIdeo);
             }
         }
     }
