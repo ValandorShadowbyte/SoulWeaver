@@ -11,6 +11,7 @@ namespace SoulSerpent
         public static HediffDef VS_MarkResistance;
         public static HediffDef VS_AwakenedSoulMark;
         public static HediffDef VS_SoulPressure;
+        public static HediffDef VS_SoulMarkAwakening;
         
         public static ThoughtDef VS_SoulMarked;
         public static ThoughtDef VS_SoulPressureThought;

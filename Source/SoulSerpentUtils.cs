@@ -106,5 +106,15 @@ namespace SoulSerpent
         {
             return TryGetHediff<Hediff_MarkResistance>(pawn, SoulSerpentDefs.VS_MarkResistance) != null;
         }
+
+        /// <summary>
+        /// Checks if a pawn is currently experiencing soul mark awakening
+        /// </summary>
+        /// <param name="pawn">The pawn to check</param>
+        /// <returns>True if the pawn has soul mark awakening</returns>
+        public static bool HasSoulMarkAwakening(Pawn pawn)
+        {
+            return TryGetHediff<Hediff>(pawn, SoulSerpentDefs.VS_SoulMarkAwakening) != null;
+        }
     }
 }

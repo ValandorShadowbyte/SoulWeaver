@@ -5,5 +5,7 @@
 	<VS.TargetMustBeMarked>Target must be under the affect of a soul mark.</VS.TargetMustBeMarked>
     <VS.TargetMustBeAdvancedMarked>Target must be under the affect of an advanced soul mark.</VS.TargetMustBeAdvancedMarked>
     <VS.TargetMustNotBeResisting>Target must not be resisting the soul mark.</VS.TargetMustNotBeResisting>
+    <VS.TargetMustNotBeMarked>Target must not be under the effect of a soul mark.</VS.TargetMustNotBeMarked>
     <VS.TargetAlreadyAwakenedMarked>Target is already under the effect of an awakened soul mark.</VS.TargetAlreadyAwakenedMarked>
+    <VS.TargetAlreadyAwakening>Target cannot be experiencing soul mark awakening.</VS.TargetAlreadyAwakening>
 </LanguagData>

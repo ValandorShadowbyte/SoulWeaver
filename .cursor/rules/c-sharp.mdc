@@ -1,5 +1,5 @@
 ---
-description: 
+description: **Use this rule when:** - Creating new C# classes (abilities, hediffs, utilities) - Modifying existing C# code - Adding new functionality to the mod - Working with RimWorld mod development in the Source directory - Compiling or building the mod assembly
 globs: 
 alwaysApply: false
 ---

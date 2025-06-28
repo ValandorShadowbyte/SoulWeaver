@@ -12,6 +12,9 @@ namespace SoulSerpent
         public bool IsMarked;
         public bool IsAdvancedMarked;
         public bool NotResistingSoulMark;
+        public bool NotMarked;
+        public bool NotAwakenedMarked;
+        public bool NotSoulMarkAwakening;
 
         public HediffDef requiredHediffOnTarget;
 
@@ -70,6 +73,36 @@ namespace SoulSerpent
                     if (throwMessages)
                     {
                         Messages.Message("VS.TargetMustNotBeResisting".Translate(), MessageTypeDefOf.CautionInput);
+                    }
+
+                    return false;
+                }
+
+                if (NotMarked && SoulSerpentUtils.HasSoulMark(target.Pawn))
+                {
+                    if (throwMessages)
+                    {
+                        Messages.Message("VS.TargetMustNotBeMarked".Translate(), MessageTypeDefOf.CautionInput);
+                    }
+
+                    return false;
+                }
+
+                if (NotAwakenedMarked && SoulSerpentUtils.HasAwakenedSoulMark(target.Pawn))
+                {
+                    if (throwMessages)
+                    {
+                        Messages.Message("VS.TargetAlreadyAwakenedMarked".Translate(), MessageTypeDefOf.CautionInput);
+                    }
+
+                    return false;
+                }
+
+                if (NotSoulMarkAwakening && SoulSerpentUtils.HasSoulMarkAwakening(target.Pawn))
+                {
+                    if (throwMessages)
+                    {
+                        Messages.Message("VS.TargetAlreadyAwakening".Translate(), MessageTypeDefOf.CautionInput);
                     }
 
                     return false;

@@ -15,7 +15,6 @@ namespace SoulSerpent
             {
                 if (target.Thing is Pawn targetPawn)
                 {
-                    // Apply awakened soul mark effect
                     ApplyAwakenedSoulMark(targetPawn);
                 }
             }
@@ -23,37 +22,36 @@ namespace SoulSerpent
 
         private void ApplyAwakenedSoulMark(Pawn targetPawn)
         {
-            // Check if target already has a basic soul mark
-            Hediff existingMark = targetPawn.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("VS_SoulMark"));
-            
-            if (existingMark != null)
+            // Check if target already has an awakened soul mark
+            if (SoulSerpentUtils.HasAwakenedSoulMark(targetPawn))
             {
-                // Remove the basic mark first
-                targetPawn.health.RemoveHediff(existingMark);
-            }
-            
-            // Apply awakened soul mark hediff
-            Hediff awakenedMark = HediffMaker.MakeHediff(HediffDef.Named("VS_AwakenedSoulMark"), targetPawn);
-            targetPawn.health.AddHediff(awakenedMark);
-        }
-
-        public override bool ValidateTarget(LocalTargetInfo target, bool throwMessages = false)
-        {
-            if (target.Pawn != null)
-            {
-                // Check if target is already awakened marked
-                Hediff awakenedMark = target.Pawn.health.hediffSet.GetFirstHediffOfDef(HediffDef.Named("VS_AwakenedSoulMark"));
-                if (awakenedMark != null)
-                {
-                    if (throwMessages)
-                    {
-                        Messages.Message("Target already has an awakened soul mark.", MessageTypeDefOf.CautionInput);
-                    }
-                    return false;
-                }
+                Messages.Message("Target already has an awakened soul mark.", MessageTypeDefOf.RejectInput);
+                return;
             }
 
-            return base.ValidateTarget(target, throwMessages);
+            // Remove basic soul mark if present and replace with awakened version
+            Hediff existingSoulMark = SoulSerpentUtils.TryGetHediff<Hediff>(targetPawn, SoulSerpentDefs.VS_SoulMark);
+            if (existingSoulMark != null)
+            {
+                targetPawn.health.RemoveHediff(existingSoulMark);
+            }
+
+            // Add or update soulweaver hediff to caster and link to target
+            Hediff_Soulweaver soulWeaver = SoulSerpentUtils.TryAddHediff<Hediff_Soulweaver>(pawn, SoulSerpentDefs.VS_Soulweaver);
+            if (!soulWeaver.markedPawns.Contains(targetPawn))
+            {
+                soulWeaver.markedPawns.Add(targetPawn);
+            }
+
+            // Add awakened soul mark to target
+            Hediff_AwakenedSoulMark awakenedMark = SoulSerpentUtils.TryAddHediff<Hediff_AwakenedSoulMark>(targetPawn, SoulSerpentDefs.VS_AwakenedSoulMark);
+            awakenedMark.master = pawn;
+
+            // Remove the basic soul marked thought
+            SoulSerpentUtils.TryRemoveThought(targetPawn, SoulSerpentDefs.VS_SoulMarked);
+
+            // Apply soul mark awakening effect (temporary consciousness reduction)
+            SoulSerpentUtils.TryAddHediff<HediffWithComps>(targetPawn, SoulSerpentDefs.VS_SoulMarkAwakening);
         }
     }
 } 

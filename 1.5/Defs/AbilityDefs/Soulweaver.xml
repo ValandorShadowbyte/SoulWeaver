@@ -3,7 +3,7 @@
     <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
         <defName>VS_SoulMark</defName>
         <label>soul mark</label>
-        <description>Mark a target's consciousness with your psychic signature, creating a spiritual link that draws them irresistibly toward joining your faction. This dark art allows you to prepare for future soul transfer abilities through the forbidden technique of consciousness manipulation.</description>
+        <description>Mark a target's consciousness with your psychic signature, creating a spiritual link that draws them irresistibly toward joining your faction. This dark art allows you to prepare for future soul transfer abilities through the forbidden technique of consciousness manipulation. The mark also enhances the target's physical and mental capabilities, granting improved consciousness, breathing, movement speed, melee combat effectiveness, and pain resistance.</description>
         <iconPath>Abilities/Soulweaver/SoulMark</iconPath>
         <abilityClass>SoulSerpent.Ability_SoulMark</abilityClass>
         <castSound>VS_SoulweaverCast</castSound>
@@ -30,6 +30,9 @@
                 <psyfocusCost>0.1</psyfocusCost>
                 <entropyGain>0.3</entropyGain>
                 <psychic>False</psychic>
+            </li>
+            <li Class="SoulSerpent.AbilityExtension_TargetValidator"> 
+                <NotMarked>True</NotMarked>
             </li>
         </modExtensions>
     </VFECore.Abilities.AbilityDef>
@@ -78,7 +81,7 @@
     <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
         <defName>VS_AwakenedSoulMark</defName>
         <label>awakened soul mark</label>
-        <description>An enhanced version of soul marking that creates a deeper, more permanent spiritual connection. This awakened technique allows for greater control over the target's consciousness and provides a stronger foundation for soul manipulation abilities. The mark is more difficult to resist and creates a more profound psychic bond.</description>
+        <description>An enhanced version of soul marking that creates a deeper, more permanent spiritual connection. This awakened technique allows for greater control over the target's consciousness and provides a stronger foundation for soul manipulation abilities. The mark is impossible to resist and creates a more profound psychic bond. The awakened mark grants even greater enhancements than a regular soul mark, including superior combat abilities, enhanced healing, damage resistance, and near-complete pain immunity.</description>
         <iconPath>Abilities/Soulweaver/AwakenedSoulMark</iconPath>
         <abilityClass>SoulSerpent.Ability_AwakenedSoulMark</abilityClass>
         <castSound>VS_SoulweaverCast</castSound>
@@ -110,6 +113,9 @@
             </li>
             <li Class="SoulSerpent.AbilityExtension_TargetValidator"> 
                 <IsMarked>True</IsMarked>
+                <NotResistingSoulMark>True</NotResistingSoulMark>
+                <NotAwakenedMarked>True</NotAwakenedMarked>
+                <NotSoulMarkAwakening>True</NotSoulMarkAwakening>
             </li>
         </modExtensions>
     </VFECore.Abilities.AbilityDef>
