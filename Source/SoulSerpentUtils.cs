@@ -133,7 +133,7 @@ namespace SoulSerpent
             return TryGetHediff<Hediff>(pawn, SoulSerpentDefs.VS_SoulMarkAwakening) != null;
         }
 
-        public static void CopyPsylink(Pawn source, Pawn dest)
+        public static void CopyPsylink(Pawn source, Pawn dest, bool notifyUpdates = false)
         {
             var sourcePsylink = PawnUtility.GetMainPsylinkSource(source);
             var sourceAbilities = PsycastUtility.Psycasts(source);
@@ -153,22 +153,89 @@ namespace SoulSerpent
                 }
             }
 
-            PawnComponentsUtility.AddAndRemoveDynamicComponents(dest, false);
+            if (notifyUpdates)
+            {
+                NotifyUpdates(dest);
+            }
         }
 
-        public static void MergeBestTraitsFromDest(Pawn source, Pawn dest)
+        public static void MergeBestTraitsFromDest(Pawn source, Pawn dest, bool notifyUpdates = false)
         {
+            //TODO: do I want to keep good traits of the dest??
 
+            foreach (var trait in dest.story.traits.allTraits.ToList())
+            {
+                dest.story.traits.RemoveTrait(trait);
+            }
+
+            //give dest source traits
+            foreach (var trait in source.story.traits.allTraits)
+            {
+                dest.story.traits.GainTrait(trait);
+            }
+
+            if (notifyUpdates)
+            {
+                NotifyUpdates(dest);
+            }
         }
 
-        public static void CopyBackstory(Pawn source, Pawn dest)
+        public static void CopyBackstory(Pawn source, Pawn dest, bool notifyUpdates = false)
         {
+            dest.story.Childhood = source.story.Childhood;
+            dest.story.Adulthood = source.story.Adulthood;
 
+            if (notifyUpdates)
+            {
+                NotifyUpdates(dest);
+            }
         }
 
-        public static void CopySkills(Pawn source, Pawn dest)
+        public static void CopySkills(Pawn source, Pawn dest, bool notifyUpdates = false)
         {
+            foreach (var skill in source.skills.skills) {
+                var skillToUpdate = dest.skills.GetSkill(skill.def);
 
+                if (skillToUpdate != null) {
+                    skillToUpdate.xpSinceLastLevel = skill.xpSinceLastLevel;
+                    skillToUpdate.xpSinceMidnight = skill.xpSinceMidnight;
+                    skillToUpdate.Level = skill.Level;
+                    skillToUpdate.passion = skill.passion;
+                }
+            }
+
+            if (notifyUpdates)
+            {
+                NotifyUpdates(dest);
+            }
+        }
+
+        public static void TransferRelations(Pawn source, Pawn dest, bool notifyUpdates = false)
+        {
+            if (source.Ideo != null && source.Ideo != dest.Ideo) {
+                dest.ideo.SetIdeo(source.Ideo);
+            }
+
+            if (source.Faction != null && source.Faction != dest.Faction) {
+                dest.SetFaction(source.Faction, source);
+            }
+
+            dest.relations.ClearAllRelations();
+            foreach (var relation in source.relations.DirectRelations)
+            {
+                dest.relations.AddDirectRelation(relation.def, relation.otherPawn);
+            }
+
+            if (notifyUpdates)
+            {
+                NotifyUpdates(dest);
+            }
+        }
+
+        public static void NotifyUpdates(Pawn pawn)
+        {
+            pawn.Notify_DisabledWorkTypesChanged();
+            PawnComponentsUtility.AddAndRemoveDynamicComponents(pawn, false);
         }
     }
 }

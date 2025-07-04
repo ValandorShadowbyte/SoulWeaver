@@ -26,6 +26,10 @@ namespace SoulSerpent
             Scribe_Collections.Look<Pawn>(ref markedPawns, "markedPawns", LookMode.Reference, Array.Empty<object>());
         }
 
+        public override void Notify_PawnKilled()
+        {
+            base.Notify_PawnKilled();
+        }
 
         public Pawn TransferToTarget(Pawn target)
         {
@@ -37,9 +41,8 @@ namespace SoulSerpent
                 SoulSerpentUtils.CopyBackstory(pawn, target);
                 SoulSerpentUtils.MergeBestTraitsFromDest(pawn, target);
                 SoulSerpentUtils.CopySkills(pawn, target);
-                TransferRelations(pawn, target);
+                SoulSerpentUtils.TransferRelations(pawn, target);
                 UpdateChronoTime(pawn, target);
-
 
                 //get the mark
                 Hediff mark = SoulSerpentUtils.TryGetHediff<Hediff_SoulMark>(target, SoulSerpentDefs.VS_SoulMark) ??
@@ -54,6 +57,8 @@ namespace SoulSerpent
                 //make the target a soulweaver
                 SoulSerpentUtils.TryAddHediff(target, soulWeaver);
 
+                SoulSerpentUtils.NotifyUpdates(target);
+
                 return target;
             }
 
@@ -66,11 +71,6 @@ namespace SoulSerpent
             var target = markedPawns.FirstOrDefault();
 
             return TransferToTarget(target);
-        }
-
-        private void TransferRelations(Pawn source, Pawn dest)
-        {
-
         }
 
         private void UpdateChronoTime(Pawn source, Pawn dest)
