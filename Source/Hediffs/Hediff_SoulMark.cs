@@ -4,15 +4,14 @@ namespace SoulSerpent
 {
     public class Hediff_SoulMark : HediffWithComps
     {
-        public Pawn master;
-        public bool pawnKilled;
+        public Pawn Master;
 
-        public override string Label => $"{base.Label}: {master.LabelShort}";
+        public override string Label => $"{base.Label}: {Master.LabelShort}";
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_References.Look<Pawn>(ref master, "master", false);
+            Scribe_References.Look<Pawn>(ref Master, "master", false);
         }
 
         public override void Notify_PawnKilled()
@@ -29,13 +28,13 @@ namespace SoulSerpent
         {
             base.PostRemoved();
 
-            if (master != null)
+            if (Master != null)
             {
-                Hediff_Soulweaver soulweaver = SoulSerpentUtils.TryGetHediff<Hediff_Soulweaver>(master, SoulSerpentDefs.VS_Soulweaver);
+                Hediff_Soulweaver soulweaver = SoulSerpentUtils.TryGetHediff<Hediff_Soulweaver>(Master, SoulSerpentDefs.VS_Soulweaver);
 
                 if (soulweaver != null)
                 {
-                    soulweaver.markedPawns.Remove(pawn);
+                    soulweaver.MarkedPawns.Remove(pawn);
                 }
             }
 
