@@ -1,3 +1,4 @@
+using System;
 using RimWorld;
 using Verse;
 
@@ -45,9 +46,16 @@ namespace SoulSerpent
         {
             if (Severity >= 1)
             {
-                //try and transfer the soulweaver to a marked pawn
-                var soulWeaver = SoulSerpentUtils.TryGetHediff<Hediff_Soulweaver>(pawn, SoulSerpentDefs.VS_Soulweaver);
-                soulWeaver?.TransferToBestTarget();
+                try
+                {
+                    //try and transfer the soulweaver to a marked pawn
+                    var soulWeaver = SoulSerpentUtils.TryGetHediff<Hediff_Soulweaver>(pawn, SoulSerpentDefs.VS_Soulweaver);
+                    soulWeaver?.TransferToBestTarget();
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"[VS.Hediff_BodyDecay] {e.Message}");
+                }
 
                 //kill the orginal host body into a cloud of ash
                 var pawnLabel = pawn.LabelIndefinite();
