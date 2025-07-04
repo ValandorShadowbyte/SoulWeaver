@@ -213,7 +213,7 @@ namespace SoulSerpent
             }
         }
 
-        public static void TransferRelations(Pawn source, Pawn dest, bool notifyUpdates = false)
+        public static void CopyBeliefs(Pawn source, Pawn dest, bool notifyUpdates = false)
         {
             if (source.Ideo != null && source.Ideo != dest.Ideo) {
                 dest.ideo.SetIdeo(source.Ideo);
@@ -221,12 +221,6 @@ namespace SoulSerpent
 
             if (source.Faction != null && source.Faction != dest.Faction) {
                 dest.SetFaction(source.Faction, source);
-            }
-
-            dest.relations.ClearAllRelations();
-            foreach (var relation in source.relations.DirectRelations)
-            {
-                dest.relations.AddDirectRelation(relation.def, relation.otherPawn);
             }
 
             if (notifyUpdates)

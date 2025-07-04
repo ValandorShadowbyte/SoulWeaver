@@ -35,13 +35,31 @@ namespace SoulSerpent
         public override void Notify_PawnKilled()
         {
             base.Notify_PawnKilled();
+
+            ResurrectOnDeath();
         }
 
+        /// <summary>
+        /// If the soulweaver has a marked pawn, they will be resurrected. The marked pawn will be downed for a while
+        /// </summary>
+        public void ResurrectOnDeath()
+        {
+            if (MarkedPawns.Count > 0)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// A death transfer happens when the main body finally gives out, this will kill the pawn the soulweaver transfers to
+        /// </summary>
         public void DeathTransfer()
         {
+            Pawn target = null;
+
             try
             {
-                TransferToBestTarget();
+                target = TransferToBestTarget();
             }
             catch (Exception e)
             {
@@ -54,6 +72,11 @@ namespace SoulSerpent
             var corpse = pawn.Corpse;
             FilthMaker.TryMakeFilth(corpse.Position, corpse.Map, ThingDefOf.Filth_Ash, pawnLabel, 5);
             corpse.Destroy(DestroyMode.Vanish);
+
+            if (target != null) 
+            {
+                CleanupSelfMemories(pawn, target);
+            }
         }
 
         public Pawn TransferToTarget(Pawn target)
@@ -66,7 +89,7 @@ namespace SoulSerpent
                 SoulSerpentUtils.CopyBackstory(pawn, target);
                 SoulSerpentUtils.MergeBestTraitsFromDest(pawn, target);
                 SoulSerpentUtils.CopySkills(pawn, target);
-                SoulSerpentUtils.TransferRelations(pawn, target);
+                SoulSerpentUtils.CopyBeliefs(pawn, target);
                 UpdateChronoTime(pawn, target);
 
                 //get the mark
@@ -93,7 +116,7 @@ namespace SoulSerpent
 
         public Pawn TransferToBestTarget()
         {
-            //TODO: make this more complex?
+            //TODO: make this more complex
             var target = MarkedPawns.FirstOrDefault();
 
             return TransferToTarget(target);
@@ -109,6 +132,20 @@ namespace SoulSerpent
             {
                 // first takeover. can just set to the original body age
                 dest.ageTracker.AgeChronologicalTicks = source.ageTracker.AgeBiologicalTicks;
+            }
+        }
+
+        /// <summary>
+        /// the soulweaver shouldn't care that they "died" since they didn't
+        /// </summary>
+        private void CleanupSelfMemories(Pawn source, Pawn dest)
+        {
+            foreach (var thought in dest.needs.mood.thoughts.memories.Memories.ToList())
+            {
+                if (thought.otherPawn == source)
+                {
+                    dest.needs.mood.thoughts.memories.RemoveMemory(thought);
+                }
             }
         }
     }
