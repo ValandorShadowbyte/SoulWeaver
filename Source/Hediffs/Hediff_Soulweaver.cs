@@ -62,7 +62,7 @@ namespace SoulSerpent
             {
                 var soulWeaver = SoulSerpentUtils.TryGetHediff<Hediff_Soulweaver>(pawn, SoulSerpentDefs.VS_Soulweaver);
 
-                SoulSerpentUtils.CopyPsylink(pawn, target);
+                SoulSerpentUtils.MovePsylink(pawn, target);
                 SoulSerpentUtils.CopyBackstory(pawn, target);
                 SoulSerpentUtils.MergeBestTraitsFromDest(pawn, target);
                 SoulSerpentUtils.CopySkills(pawn, target);
