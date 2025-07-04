@@ -133,10 +133,13 @@ namespace SoulSerpent
             return TryGetHediff<Hediff>(pawn, SoulSerpentDefs.VS_SoulMarkAwakening) != null;
         }
 
-        public static void CopyPsylink(Pawn source, Pawn dest, bool notifyUpdates = false)
+        public static void MovePsylink(Pawn source, Pawn dest, bool notifyUpdates = false)
         {
             var sourcePsylink = PawnUtility.GetMainPsylinkSource(source);
             var sourceAbilities = PsycastUtility.Psycasts(source);
+
+            source.health.RemoveHediff(sourcePsylink);
+            source.health.RemoveHediff(sourceAbilities);
 
             dest.health.hediffSet.hediffs.Add(sourcePsylink);
             dest.health.hediffSet.hediffs.Add(sourceAbilities);
