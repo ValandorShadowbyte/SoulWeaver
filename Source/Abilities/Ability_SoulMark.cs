@@ -26,11 +26,11 @@ namespace SoulSerpent
 
             // Add soulweaver hediff to caster and link to target
             Hediff_Soulweaver soulWeaver = SoulSerpentUtils.TryAddHediff<Hediff_Soulweaver>(pawn, SoulSerpentDefs.VS_Soulweaver);
-            soulWeaver.markedPawns.Add(targetPawn);
+            soulWeaver.MarkedPawns.Add(targetPawn);
 
             // Add soul mark to target
             Hediff_SoulMark soulMark = SoulSerpentUtils.TryAddHediff<Hediff_SoulMark>(targetPawn, SoulSerpentDefs.VS_SoulMark);
-            soulMark.master = pawn;
+            soulMark.Master = pawn;
 
             SoulSerpentUtils.TryAddHediff<Hediff_MarkResistance>(targetPawn, SoulSerpentDefs.VS_MarkResistance);
         }

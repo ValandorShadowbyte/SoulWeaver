@@ -38,14 +38,14 @@ namespace SoulSerpent
 
             // Add or update soulweaver hediff to caster and link to target
             Hediff_Soulweaver soulWeaver = SoulSerpentUtils.TryAddHediff<Hediff_Soulweaver>(pawn, SoulSerpentDefs.VS_Soulweaver);
-            if (!soulWeaver.markedPawns.Contains(targetPawn))
+            if (!soulWeaver.MarkedPawns.Contains(targetPawn))
             {
-                soulWeaver.markedPawns.Add(targetPawn);
+                soulWeaver.MarkedPawns.Add(targetPawn);
             }
 
             // Add awakened soul mark to target
             Hediff_AwakenedSoulMark awakenedMark = SoulSerpentUtils.TryAddHediff<Hediff_AwakenedSoulMark>(targetPawn, SoulSerpentDefs.VS_AwakenedSoulMark);
-            awakenedMark.master = pawn;
+            awakenedMark.Master = pawn;
 
             // Apply soul mark awakening effect (temporary consciousness reduction)
             SoulSerpentUtils.TryAddHediff<HediffWithComps>(targetPawn, SoulSerpentDefs.VS_SoulMarkAwakening);
