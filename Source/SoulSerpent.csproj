@@ -37,9 +37,6 @@
     <Compile Include="Abilities\Ability_SoulPressure.cs" />
     <Compile Include="AbilityExtension_TargetValidator.cs" />
     <Compile Include="HarmonyPatches\DeathNotificationDisabler.cs" />
-    <Compile Include="HarmonyPatches\Ideo_Notify_MemberDied_Patch.cs" />
-    <Compile Include="HarmonyPatches\PatchControls.cs" />
-    <Compile Include="HarmonyPatches\RitualObligationTrigger_MemberCorpseDestroyed_Patch.cs" />
     <Compile Include="Hediffs\Hediff_AwakenedSoulMark.cs" />
     <Compile Include="Hediffs\Hediff_BodyDecay.cs" />
     <Compile Include="Hediffs\Hediff_MarkResistance.cs" />
