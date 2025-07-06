@@ -32,4 +32,36 @@
             </li>
         </subSounds>
     </SoundDef>
+    <SoundDef>
+        <defName>VS_SoulweaverResurrection</defName>
+        <context>MapOnly</context>
+        <maxSimultaneous>1</maxSimultaneous>
+        <subSounds>
+            <li>
+                <grains>
+                    <li Class="AudioGrain_Clip">
+                        <clipPath>Soulweaver_Resurrection</clipPath>
+                    </li>
+                </grains>
+                <volumeRange>50</volumeRange>
+                <distRange>25~60</distRange>
+            </li>
+        </subSounds>
+    </SoundDef>
+    <SoundDef>
+        <defName>VS_SoulweaverDeath</defName>
+        <context>MapOnly</context>
+        <maxSimultaneous>1</maxSimultaneous>
+        <subSounds>
+            <li>
+                <grains>
+                    <li Class="AudioGrain_Clip">
+                        <clipPath>Soulweaver_Death</clipPath>
+                    </li>
+                </grains>
+                <volumeRange>50</volumeRange>
+                <distRange>25~60</distRange>
+            </li>
+        </subSounds>
+    </SoundDef>
 </Defs>

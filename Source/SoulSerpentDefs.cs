@@ -13,8 +13,12 @@ namespace SoulSerpent
         public static HediffDef VS_SoulPressure;
         public static HediffDef VS_SoulMarkAwakening;
         public static HediffDef VS_BodyDecay;
+        public static HediffDef VS_ResurrectionExhaustion;
         
         public static ThoughtDef VS_SoulMarked;
         public static ThoughtDef VS_SoulPressureThought;
+        
+        public static SoundDef VS_SoulweaverResurrection;
+        public static SoundDef VS_SoulweaverDeath;
     }
 }

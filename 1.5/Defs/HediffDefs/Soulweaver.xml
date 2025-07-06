@@ -15,6 +15,9 @@
         <hediffClass>SoulSerpent.Hediff_SoulMark</hediffClass>
         <defaultLabelColor>(0.8, 0.4, 0.8)</defaultLabelColor>
         <isBad>false</isBad>
+        <comps>
+            <li Class="HediffCompProperties_DisappearsOnDeath" />
+        </comps>
         <stages>
             <li>
                 <capMods>
@@ -41,11 +44,14 @@
 
     <HediffDef>
         <defName>VS_AwakenedSoulMark</defName>
-        <label>awakend soul mark</label>
+        <label>awakened soul mark</label>
         <description>A deep, permanent spiritual connection has been established. Your consciousness is now bound to the caster through an awakened soul mark, providing a stronger foundation for soul manipulation.</description>
         <hediffClass>SoulSerpent.Hediff_AwakenedSoulMark</hediffClass>
         <defaultLabelColor>(0.9, 0.3, 0.9)</defaultLabelColor>
         <isBad>false</isBad>
+        <comps>
+            <li Class="HediffCompProperties_DisappearsOnDeath" />
+        </comps>
         <stages>
             <li>
                 <capMods>
@@ -79,7 +85,7 @@
         <description>Your mind is resisting the psychic pressure of the soul mark, causing temporary unconsciousness. When you wake up, the psychic conflict may cause violent outbursts.</description>
         <hediffClass>SoulSerpent.Hediff_MarkResistance</hediffClass>
         <defaultLabelColor>(0.6, 0.6, 0.8)</defaultLabelColor>
-        <isBad>false</isBad>
+        <isBad>true</isBad>
         <initialSeverity>0.3</initialSeverity>
         <comps>
             <li Class="HediffCompProperties_DisappearsOnDeath" />
@@ -229,7 +235,7 @@
     <HediffDef>
         <defName>VS_BodyDecay</defName>
         <label>body decay</label>
-        <description>this should be set by the C# class, if you can see it something is wrong with the mod</description>
+        <description>Your physical form is deteriorating from the strain of soul manipulation.</description>
         <hediffClass>SoulSerpent.Hediff_BodyDecay</hediffClass>
         <defaultLabelColor>(0.4, 0.2, 0.1)</defaultLabelColor>
         <isBad>true</isBad>
@@ -315,6 +321,63 @@
             <li>
                 <label>vessel death</label>
                 <minSeverity>1</minSeverity>
+            </li>
+        </stages>
+    </HediffDef>
+
+    <HediffDef>
+        <defName>VS_ResurrectionExhaustion</defName>
+        <label>resurrection exhaustion</label>
+        <description>Your consciousness has been drained by the soulweaver's resurrection process. The intense psychic strain has left you unconscious and in pain as your mind recovers from the ordeal.</description>
+        <hediffClass>SoulSerpent.Hediff_ResurrectionExhaustion</hediffClass>
+        <defaultLabelColor>(0.5, 0.3, 0.7)</defaultLabelColor>
+        <isBad>true</isBad>
+        <initialSeverity>1.0</initialSeverity>
+        <extraTooltip>If a soulweaver attempts to resurrect themselves using your body again while you have this condition, you will die.</extraTooltip>
+        <comps>
+            <li Class="HediffCompProperties_DisappearsOnDeath" />
+            <li Class="HediffCompProperties_SeverityPerDay">
+                <severityPerDay>-0.33</severityPerDay>
+                <showHoursToRecover>true</showHoursToRecover>
+            </li>
+        </comps>
+        <stages>
+            <li>
+                <label>lingering soul strain</label>
+                <minSeverity>0.1</minSeverity>
+                <overrideTooltip>Your consciousness still bears the faint imprint of the soulweaver's resurrection process. While you have recovered from the worst effects, the spiritual connection remains.</overrideTooltip>
+            </li>
+            <li>
+                <label>recovering</label>
+                <minSeverity>0.33</minSeverity>
+                <painOffset>0.2</painOffset>
+                <overrideTooltip>Your mind is slowly recovering from the soulweaver's resurrection process. You are conscious but still experiencing pain and reduced physical capabilities as your consciousness stabilizes.</overrideTooltip>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <setMax>0.5</setMax>
+                    </li>
+                    <li>
+                        <capacity>Manipulation</capacity>
+                        <offset>-0.3</offset>
+                    </li>
+                    <li>
+                        <capacity>Moving</capacity>
+                        <offset>-0.3</offset>
+                    </li>
+                </capMods>
+            </li>
+            <li>
+                <label>unconscious</label>
+                <minSeverity>0.67</minSeverity>
+                <painOffset>0.3</painOffset>
+                <overrideTooltip>Your consciousness has been overwhelmed by the soulweaver's resurrection process. You are unconscious and in severe pain as your mind struggles to process the intense psychic strain.</overrideTooltip>
+                <capMods>
+                    <li>
+                        <capacity>Consciousness</capacity>
+                        <setMax>0.1</setMax>
+                    </li>
+                </capMods>
             </li>
         </stages>
     </HediffDef>

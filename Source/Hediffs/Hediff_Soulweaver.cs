@@ -9,19 +9,22 @@ namespace SoulSerpent
     public class Hediff_Soulweaver : HediffWithComps
     {
         public List<Pawn> MarkedPawns = new List<Pawn>();
-        public bool OriginalBody;
+        public bool? OriginalBody = null;
 
         public override void PostAdd(DamageInfo? dinfo)
         {
-            OriginalBody = false;
+            if (OriginalBody is null)
+            {
+                OriginalBody = true;
+            }
 
             base.PostAdd(dinfo);
             
             // Apply body decay when soulweaver hediff is added
             if (pawn != null && !pawn.Dead)
             {
+                DeathNotificationDisabler.AddPawnToSkipList(pawn);
                 SoulSerpentUtils.TryAddHediff<Hediff_BodyDecay>(pawn, SoulSerpentDefs.VS_BodyDecay);
-                OriginalBody = true;
             }
         }
         
@@ -32,10 +35,9 @@ namespace SoulSerpent
             Scribe_Values.Look(ref OriginalBody, "OriginalBody", true);
         }
 
-        public override void Notify_PawnKilled()
+        public override void Notify_PawnDied(DamageInfo? dinfo, Hediff culprit = null)
         {
-            base.Notify_PawnKilled();
-
+            base.Notify_PawnDied(dinfo, culprit);
             ResurrectOnDeath();
         }
 
@@ -44,16 +46,44 @@ namespace SoulSerpent
         /// </summary>
         public void ResurrectOnDeath()
         {
-            if (MarkedPawns.Count > 0)
+            if (pawn.Dead)
             {
+                var resurrectingFrom = BestMarkedPawn();
 
+                // Only attempt resurrection if we have a valid target
+                if (resurrectingFrom != null)
+                {
+                    SoulSerpentUtils.SoulSerpentResurrect(pawn, resurrectingFrom);
+
+                    // Apply resurrection exhaustion to the marked pawn that was used for resurrection
+                    if (!resurrectingFrom.Dead)
+                    {
+                        // Check if the target already has resurrection exhaustion - if so, kill them
+                        var existingExhaustion = SoulSerpentUtils.TryGetHediff<Hediff_ResurrectionExhaustion>(resurrectingFrom, SoulSerpentDefs.VS_ResurrectionExhaustion);
+                        if (existingExhaustion != null)
+                        {
+                            resurrectingFrom.Kill(null);
+                            Messages.Message("VS.ResurrectionTargetKilled".Translate(resurrectingFrom.LabelShort), MessageTypeDefOf.CautionInput);
+                        }
+                        else
+                        {
+                            SoulSerpentUtils.TryAddHediff<Hediff_ResurrectionExhaustion>(resurrectingFrom, SoulSerpentDefs.VS_ResurrectionExhaustion);
+                        }
+                    }
+
+                    Find.LetterStack.ReceiveLetter("VS.SoulweaverResurrectedTitle".Translate(), "VS.SoulweaverResurrectedLetter".Translate(pawn.LabelShort), LetterDefOf.PositiveEvent, pawn);
+                }
+                else
+                {
+                    SoulSerpentUtils.SoulweaverDeath(pawn);
+                }
             }
         }
 
         /// <summary>
         /// A death transfer happens when the main body finally gives out, this will kill the pawn the soulweaver transfers to
         /// </summary>
-        public void DeathTransfer()
+        public void DeathTransferFromBodyDecay()
         {
             Pawn target = null;
 
@@ -66,16 +96,17 @@ namespace SoulSerpent
                 Log.Error($"[SoulSerpent] {e.Message}");
             }
 
-            //kill the orginal host body into a cloud of ash
-            var pawnLabel = pawn.LabelIndefinite();
-            pawn.Kill(null);
-            var corpse = pawn.Corpse;
-            FilthMaker.TryMakeFilth(corpse.Position, corpse.Map, ThingDefOf.Filth_Ash, pawnLabel, 5);
-            corpse.Destroy(DestroyMode.Vanish);
 
             if (target != null) 
             {
+                SoulSerpentUtils.CreateHusk(pawn);
+                SoulSerpentUtils.DestroyPawnIntoGore(pawn);
+
                 CleanupSelfMemories(pawn, target);
+            }
+            else
+            {
+                SoulSerpentUtils.SoulweaverDeath(pawn);
             }
         }
 
@@ -84,6 +115,20 @@ namespace SoulSerpent
             if (target != null && MarkedPawns.Contains(target))
             {
                 var soulWeaver = SoulSerpentUtils.TryGetHediff<Hediff_Soulweaver>(pawn, SoulSerpentDefs.VS_Soulweaver);
+
+                // Remove resurrection exhaustion from target if they have it
+                var exhaustion = SoulSerpentUtils.TryGetHediff<Hediff_ResurrectionExhaustion>(target, SoulSerpentDefs.VS_ResurrectionExhaustion);
+                if (exhaustion != null)
+                {
+                    SoulSerpentUtils.TryRemoveHediff(target, exhaustion);
+                }
+
+                // Remove mark resistance from target if they have it
+                var markResistance = SoulSerpentUtils.TryGetHediff<Hediff_MarkResistance>(target, SoulSerpentDefs.VS_MarkResistance);
+                if (markResistance != null)
+                {
+                    SoulSerpentUtils.TryRemoveHediff(target, markResistance);
+                }
 
                 SoulSerpentUtils.MovePsylink(pawn, target);
                 SoulSerpentUtils.CopyBackstory(pawn, target);
@@ -108,6 +153,14 @@ namespace SoulSerpent
 
                 SoulSerpentUtils.NotifyUpdates(target);
 
+                // Send letter notification about the transfer
+                Find.LetterStack.ReceiveLetter(
+                    "VS.SoulweaverTransferTitle".Translate(), 
+                    "VS.SoulweaverTransferLetter".Translate(pawn.LabelShort, target.LabelShort), 
+                    LetterDefOf.NeutralEvent, 
+                    target
+                );
+
                 return target;
             }
 
@@ -116,15 +169,49 @@ namespace SoulSerpent
 
         public Pawn TransferToBestTarget()
         {
-            //TODO: make this more complex
-            var target = MarkedPawns.FirstOrDefault();
+            return TransferToTarget(BestMarkedPawn());
+        }
 
-            return TransferToTarget(target);
+        public Pawn BestMarkedPawn()
+        {
+            // Prioritize pawns without resurrection exhaustion and without mark resistance
+            var availablePawns = MarkedPawns.Where(p => p != null && !p.Dead && 
+                SoulSerpentUtils.TryGetHediff<Hediff_MarkResistance>(p, SoulSerpentDefs.VS_MarkResistance) == null).ToList();
+            
+            if (availablePawns.Count > 0)
+            {
+                // First try to find non-exhausted pawns on the same map
+                var nonExhaustedSameMapPawns = availablePawns.Where(p => 
+                    SoulSerpentUtils.TryGetHediff<Hediff_ResurrectionExhaustion>(p, SoulSerpentDefs.VS_ResurrectionExhaustion) == null &&
+                    p.Map == pawn.Map
+                ).ToList();
+            
+                // If we have non-exhausted pawns on the same map, return the first one
+                if (nonExhaustedSameMapPawns.Count > 0)
+                    return nonExhaustedSameMapPawns.First();
+            
+                // Then try to find any non-exhausted pawns (regardless of map)
+                var nonExhaustedPawns = availablePawns.Where(p => 
+                    SoulSerpentUtils.TryGetHediff<Hediff_ResurrectionExhaustion>(p, SoulSerpentDefs.VS_ResurrectionExhaustion) == null
+                ).ToList();
+            
+                // If we have non-exhausted pawns, return the first one
+                if (nonExhaustedPawns.Count > 0)
+                    return nonExhaustedPawns.First();
+            
+                // If all pawns have exhaustion, prioritize same map pawns
+                var sameMapPawns = availablePawns.Where(p => p.Map == pawn.Map).ToList();
+                if (sameMapPawns.Count > 0)
+                    return sameMapPawns.First();
+            }
+            
+            // Fall back to the first available pawn
+            return availablePawns.Count > 0 ? availablePawns.First() : null;
         }
 
         private void UpdateChronoTime(Pawn source, Pawn dest)
         {
-            if (!OriginalBody)
+            if (OriginalBody.HasValue && !OriginalBody.Value)
             {
                 dest.ageTracker.AgeChronologicalTicks = dest.ageTracker.AgeChronologicalTicks;
             }

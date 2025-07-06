@@ -8,4 +8,11 @@
     <VS.TargetMustNotBeMarked>Target must not be under the effect of a soul mark.</VS.TargetMustNotBeMarked>
     <VS.TargetAlreadyAwakenedMarked>Target is already under the effect of an awakened soul mark.</VS.TargetAlreadyAwakenedMarked>
     <VS.TargetAlreadyAwakening>Target cannot be experiencing soul mark awakening.</VS.TargetAlreadyAwakening>
+    <VS.SoulweaverResurrectedTitle>Soulweaver Resurrection</VS.SoulweaverResurrectedTitle>
+    <VS.SoulweaverResurrectedLetter>{0} has been resurrected through the power of a soul mark.</VS.SoulweaverResurrectedLetter>
+    <VS.ResurrectionTargetKilled>{0} was killed by the strain of repeated resurrection.</VS.ResurrectionTargetKilled>
+    <VS.SoulweaverTransferTitle>Soulweaver Body Transfer</VS.SoulweaverTransferTitle>
+    <VS.SoulweaverTransferLetter>Due to {0}'s body falling apart, they were forced to transfer their soul to {1}, taking over their body completely.</VS.SoulweaverTransferLetter>
+    <VS.SoulweaverPermanentDeathTitle>Soulweaver Permanent Death</VS.SoulweaverPermanentDeathTitle>
+    <VS.SoulweaverPermanentDeathLetter>{0} has died permanently. With no valid marked pawns available for resurrection, their soul has been lost forever.</VS.SoulweaverPermanentDeathLetter>
 </LanguagData>

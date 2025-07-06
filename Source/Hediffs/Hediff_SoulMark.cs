@@ -14,16 +14,6 @@ namespace SoulSerpent
             Scribe_References.Look<Pawn>(ref Master, "master", false);
         }
 
-        public override void Notify_PawnKilled()
-        {
-            base.Notify_PawnKilled();
-
-            if (pawn.health.hediffSet.hediffs.Contains(this))
-            {
-                pawn.health.RemoveHediff(this);
-            }
-        }
-
         public override void PostRemoved()
         {
             base.PostRemoved();
@@ -39,6 +29,20 @@ namespace SoulSerpent
             }
 
             SoulSerpentUtils.TryRemoveThought(pawn, SoulSerpentDefs.VS_SoulMarked);
+
+            // Remove mark resistance
+            var markResistance = SoulSerpentUtils.TryGetHediff<Hediff_MarkResistance>(pawn, SoulSerpentDefs.VS_MarkResistance);
+            if (markResistance != null)
+            {
+                SoulSerpentUtils.TryRemoveHediff(pawn, markResistance);
+            }
+
+            // Remove resurrection exhaustion
+            var resurrectionExhaustion = SoulSerpentUtils.TryGetHediff<Hediff_ResurrectionExhaustion>(pawn, SoulSerpentDefs.VS_ResurrectionExhaustion);
+            if (resurrectionExhaustion != null)
+            {
+                SoulSerpentUtils.TryRemoveHediff(pawn, resurrectionExhaustion);
+            }
         }
     }
 }

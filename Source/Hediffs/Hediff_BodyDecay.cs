@@ -48,7 +48,7 @@ namespace SoulSerpent
             {
                 //try and transfer the soulweaver to a marked pawn
                 var soulWeaver = SoulSerpentUtils.TryGetHediff<Hediff_Soulweaver>(pawn, SoulSerpentDefs.VS_Soulweaver);
-                soulWeaver?.DeathTransfer();
+                soulWeaver?.DeathTransferFromBodyDecay();
             }
 
             base.Tick();

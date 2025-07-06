@@ -3,11 +3,11 @@
   <VanillaPsycastsExpanded.PsycasterPathDef>
     <defName>VS_Soulweaver</defName>
     <label>soulweaver</label>
-    <description>Soulweaver psycasts focus on transferring consciousness between bodies, allowing you to possess enemies, swap bodies with allies, and achieve immortality through continuous soul transfer.</description>
+    <description>Soulweaver psycasts focus on transferring consciousness between bodies, allowing you to possess enemies, swap bodies, and achieve immortality through continuous soul transfer. Their resurrection abilities allow them to resurrect themselves using another's body, but attempting to resurrect themselves too frequently will kill the person whose body they're using.</description>
     <background>UI/Backgrounds/SoulweaverPath</background>
     <altBackground>UI/Backgrounds/SoulweaverPath</altBackground>
     <tab>Psycasts</tab>
-    <tooltip>Soulweavers are forbidden psycasters who have mastered the dark art of consciousness transfer. They can possess the bodies of enemies to turn them against their allies, swap consciousness with pawns to escape death, and even create vessels to house their soul when their current body becomes too damaged. These masters of body-hopping are feared for their ability to never truly die, always finding a new host when their current vessel fails them.</tooltip>
+    <tooltip>Soulweavers are forbidden psycasters who have mastered the dark art of consciousness transfer. They can possess the bodies of enemies to turn them against their allies, swap consciousness with pawns to escape death, and even create vessels to house their soul when their current body becomes too damaged. These masters of body-hopping are feared for their ability to never truly die, always finding a new host when their current vessel fails them. Their resurrection abilities allow them to resurrect themselves using another's body, but the process is dangerous - attempting to resurrect themselves too frequently will kill the person whose body they're using due to the overwhelming psychic strain.</tooltip>
   </VanillaPsycastsExpanded.PsycasterPathDef>
   <VanillaPsycastsExpanded.PsycasterPathDef>
     <defName>VS_Snakesage</defName>
