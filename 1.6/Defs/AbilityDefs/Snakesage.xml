@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-    <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+    <VEF.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
         <defName>VS_SerpentineTerror</defName>
         <label>serpentine terror</label>
         <description>Channel the primal fear of serpents into your target's mind, overwhelming them with visions of slithering shadows and venomous fangs. This ancient technique instills deep psychological terror, causing the target to experience paralyzing fear from the overwhelming serpentine presence invading their consciousness.</description>
@@ -30,5 +30,5 @@
                 <psychic>False</psychic>
             </li>
         </modExtensions>
-    </VFECore.Abilities.AbilityDef>
+    </VEF.Abilities.AbilityDef>
 </Defs>

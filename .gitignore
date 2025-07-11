@@ -39,7 +39,7 @@
 Thumbs.db
 
 # C# side
-Source/SoulWeaver/Plugins
+Source/Plugins/*
 
 Assemblies/*
 !Assemblies/SoulSerpent.dll

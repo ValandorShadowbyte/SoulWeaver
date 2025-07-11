@@ -3,7 +3,7 @@ using RimWorld;
 using VanillaPsycastsExpanded;
 using Verse;
 using Verse.Sound;
-using VFECore.Abilities;
+using VEF.Abilities;
 using PsycastUtility = VanillaPsycastsExpanded.PsycastUtility;
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-    <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+    <VEF.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
         <defName>VS_SoulMark</defName>
         <label>soul mark</label>
         <description>Mark a target's consciousness with your psychic signature, creating a spiritual link that draws them irresistibly toward joining your faction. This dark art allows you to prepare for future soul transfer abilities through the forbidden technique of consciousness manipulation. The mark also enhances the target's physical and mental capabilities, granting improved consciousness, breathing, movement speed, melee combat effectiveness, and pain resistance.</description>
@@ -35,9 +35,9 @@
                 <NotMarked>True</NotMarked>
             </li>
         </modExtensions>
-    </VFECore.Abilities.AbilityDef>
+    </VEF.Abilities.AbilityDef>
 
-    <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+    <VEF.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
         <defName>VS_SoulPressure</defName>
         <label>soul pressure</label>
         <description>Exert psychic pressure on a soul-marked target, causing intense mental strain and psychological distress that can down them. This ability leverages the existing spiritual connection to overwhelm the target's consciousness with unbearable psychic force. The established soul link makes this ability much more efficient and cost-effective than direct psychic attacks, allowing for near-instant application of psychic pressure.</description>
@@ -76,9 +76,9 @@
                 <NotDown>True</NotDown>
             </li>
         </modExtensions>
-    </VFECore.Abilities.AbilityDef>
+    </VEF.Abilities.AbilityDef>
 
-    <VFECore.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+    <VEF.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
         <defName>VS_AwakenedSoulMark</defName>
         <label>awakened soul mark</label>
         <description>An enhanced version of soul marking that creates a deeper, more permanent spiritual connection. This awakened technique allows for greater control over the target's consciousness and provides a stronger foundation for soul manipulation abilities. The mark is impossible to resist and creates a more profound psychic bond. The awakened mark grants even greater enhancements than a regular soul mark, including superior combat abilities, enhanced healing, damage resistance, and near-complete pain immunity.</description>
@@ -118,5 +118,5 @@
                 <NotSoulMarkAwakening>True</NotSoulMarkAwakening>
             </li>
         </modExtensions>
-    </VFECore.Abilities.AbilityDef>
+    </VEF.Abilities.AbilityDef>
 </Defs>

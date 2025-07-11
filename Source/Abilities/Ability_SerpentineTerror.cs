@@ -1,4 +1,4 @@
-﻿using Ability = VFECore.Abilities.Ability;
+﻿using Ability = VEF.Abilities.Ability;
 
 namespace SoulSerpent
 {
