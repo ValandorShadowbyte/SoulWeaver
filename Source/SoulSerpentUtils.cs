@@ -418,6 +418,44 @@ namespace SoulSerpent
             }
         }
 
+        /// <summary>
+        /// Drops all items and gear from a pawn at their current position
+        /// </summary>
+        /// <param name="pawn">The pawn to drop items from</param>
+        /// <param name="forbid">Whether to forbid the dropped items</param>
+        /// <param name="rememberPrimary">Whether to remember the primary weapon for pickup</param>
+        public static void DropAllItemsAndGear(Pawn pawn, bool forbid = true, bool rememberPrimary = false)
+        {
+            if (pawn == null)
+                return;
+
+            IntVec3 dropPosition = pawn.PositionHeld;
+            
+            // Drop all equipment (weapons, tools, etc.)
+            if (pawn.equipment != null && pawn.equipment.HasAnything())
+            {
+                pawn.equipment.DropAllEquipment(dropPosition, forbid, rememberPrimary);
+            }
+            
+            // Drop all apparel (clothing, armor, etc.)
+            if (pawn.apparel != null && pawn.apparel.AnyApparel)
+            {
+                pawn.apparel.DropAll(dropPosition, forbid, dropLocked: true);
+            }
+            
+            // Drop all inventory items
+            if (pawn.inventory != null && pawn.inventory.innerContainer.Count > 0)
+            {
+                pawn.inventory.DropAllNearPawn(dropPosition, forbid);
+            }
+            
+            // Drop carried item if any
+            if (pawn.carryTracker != null && pawn.carryTracker.CarriedThing != null)
+            {
+                pawn.carryTracker.TryDropCarriedThing(dropPosition, ThingPlaceMode.Near, out Thing _);
+            }
+        }
+
         public static void NotifyUpdates(Pawn pawn)
         {
             pawn.Notify_DisabledWorkTypesChanged();
@@ -683,8 +721,13 @@ namespace SoulSerpent
             }
         }
 
-        public static void DestroyPawnIntoGore(Pawn pawn)
+        public static void DestroyPawnIntoGore(Pawn pawn, bool dropThings = true)
         {
+            if (dropThings)
+            {
+                DropAllItemsAndGear(pawn);
+            }
+
             try
             {
                 if (pawn != null && !pawn.Dead)
