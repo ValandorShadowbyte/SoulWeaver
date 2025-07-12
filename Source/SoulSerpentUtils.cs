@@ -175,7 +175,7 @@ namespace SoulSerpent
             return TryGetHediff<Hediff>(pawn, SoulSerpentDefs.VS_SoulMarkAwakening) != null;
         }
 
-        public static void MovePsylink(Pawn source, Pawn dest, bool notifyUpdates = false)
+        public static void MovePsylink(Pawn source, Pawn dest)
         {
             try
             {
@@ -187,44 +187,40 @@ namespace SoulSerpent
                     source.health.RemoveHediff(sourcePsylink);
                     if (dest.health.hediffSet != null)
                     {
+                        sourcePsylink.pawn = dest;
                         dest.health.hediffSet.hediffs.Add(sourcePsylink);
                     }
                 }
-                
+
                 if (sourceAbilities != null && source.health != null && dest.health != null)
                 {
                     source.health.RemoveHediff(sourceAbilities);
                     if (dest.health.hediffSet != null)
                     {
+                        sourceAbilities.pawn = dest;
                         dest.health.hediffSet.hediffs.Add(sourceAbilities);
                     }
                 }
 
-                // Use reflection to access private fields for proper psyfocus copying
+                // Copy psychic entropy values using reflection (since we can't access private fields directly)
                 if (source.psychicEntropy != null && dest.psychicEntropy != null)
                 {
-                    // Access private fields using reflection
                     var currentEntropyField = typeof(Pawn_PsychicEntropyTracker).GetField("currentEntropy", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
                     var currentPsyfocusField = typeof(Pawn_PsychicEntropyTracker).GetField("currentPsyfocus", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
                     var targetPsyfocusField = typeof(Pawn_PsychicEntropyTracker).GetField("targetPsyfocus", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
                     if (currentEntropyField != null && currentPsyfocusField != null && targetPsyfocusField != null)
                     {
-                        // Copy the actual field values
                         currentEntropyField.SetValue(dest.psychicEntropy, currentEntropyField.GetValue(source.psychicEntropy));
                         currentPsyfocusField.SetValue(dest.psychicEntropy, currentPsyfocusField.GetValue(source.psychicEntropy));
                         targetPsyfocusField.SetValue(dest.psychicEntropy, targetPsyfocusField.GetValue(source.psychicEntropy));
                     }
-                    else
-                    {
-                        // Fallback to public methods if reflection fails
-                        dest.psychicEntropy.OffsetPsyfocusDirectly(source.psychicEntropy.CurrentPsyfocus);
-                        dest.psychicEntropy.TryAddEntropy(source.psychicEntropy.EntropyValue);
-                        dest.psychicEntropy.SetPsyfocusTarget(source.psychicEntropy.TargetPsyfocus);
-                    }
-                    
+
                     dest.psychicEntropy.limitEntropyAmount = source.psychicEntropy.limitEntropyAmount;
                 }
+
+                // Create new psychic entropy tracker for source pawn (like VPEPuppeteer does)
+                source.psychicEntropy = new Pawn_PsychicEntropyTracker(source);
 
                 var sourceComp = source.GetComp<CompAbilities>();
                 var destComp = dest.GetComp<CompAbilities>();
@@ -234,15 +230,15 @@ namespace SoulSerpent
                     {
                         if (ability.def.GetModExtension<AbilityExtension_Psycast>() != null)
                         {
+                            sourceComp.LearnedAbilities.Remove(ability);
                             destComp.GiveAbility(ability.def);
                         }
                     }
                 }
 
-                if (notifyUpdates)
-                {
-                    NotifyUpdates(dest);
-                }
+                // Add and remove dynamic components (like VPEPuppeteer does)
+                PawnComponentsUtility.AddAndRemoveDynamicComponents(source);
+                PawnComponentsUtility.AddAndRemoveDynamicComponents(dest);
             }
             catch (System.Exception ex)
             {
