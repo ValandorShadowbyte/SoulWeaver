@@ -68,6 +68,8 @@ namespace SoulSerpent
                     return false;
                 }
 
+
+
                 if (NotResistingSoulMark && SoulSerpentUtils.IsResistingSoulMark(target.Pawn))
                 {
                     if (throwMessages)
