@@ -125,6 +125,7 @@ namespace SoulSerpent
                 }
 
                 SoulSerpentUtils.MovePsylink(pawn, target);
+                SoulSerpentUtils.CopyNonPsycastAbilities(pawn, target);
                 SoulSerpentUtils.CopyBackstory(pawn, target);
                 SoulSerpentUtils.MergeBestTraitsFromDest(pawn, target);
                 SoulSerpentUtils.CopySkills(pawn, target);

@@ -175,6 +175,45 @@ namespace SoulSerpent
             return TryGetHediff<Hediff>(pawn, SoulSerpentDefs.VS_SoulMarkAwakening) != null;
         }
 
+        public static void CopyNonPsycastAbilities(Pawn sourcePawn, Pawn targetPawn, bool removeFromSource = false)
+        {
+            // VEF/Vanilla Expanded Framework abilities
+            var sourceComp = sourcePawn.GetComp<CompAbilities>();
+            var targetComp = targetPawn.GetComp<CompAbilities>();
+            if (sourceComp != null && targetComp != null)
+            {
+                foreach (var ability in sourceComp.LearnedAbilities.ToList())
+                {
+                    // Skip psycasts (those with AbilityExtension_Psycast)
+                    if (ability.def.GetModExtension<AbilityExtension_Psycast>() == null)
+                    {
+                        if (!targetComp.HasAbility(ability.def))
+                            targetComp.GiveAbility(ability.def);
+                        if (removeFromSource)
+                            sourceComp.LearnedAbilities.Remove(ability);
+                    }
+                }
+            }
+
+            // Vanilla RimWorld abilities (if used)
+            if (sourcePawn.abilities != null && targetPawn.abilities != null)
+            {
+                foreach (var ability in sourcePawn.abilities.abilities.ToList())
+                {
+                    // Skip psycasts (those whose abilityClass is Psycast or have AbilityExtension_Psycast)
+                    bool isPsycast = ability.def.abilityClass?.Name == "Psycast"
+                        || ability.def.GetModExtension<AbilityExtension_Psycast>() != null;
+                    if (!isPsycast)
+                    {
+                        if (targetPawn.abilities.GetAbility(ability.def) == null)
+                            targetPawn.abilities.GainAbility(ability.def);
+                        if (removeFromSource)
+                            sourcePawn.abilities.RemoveAbility(ability.def);
+                    }
+                }
+            }
+        }
+
         public static void MovePsylink(Pawn source, Pawn dest)
         {
             try
