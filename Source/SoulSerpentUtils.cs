@@ -375,6 +375,20 @@ namespace SoulSerpent
             // Copy follow settings
             targetPawn.playerSettings.followDrafted = sourcePawn.playerSettings.followDrafted;
             targetPawn.playerSettings.followFieldwork = sourcePawn.playerSettings.followFieldwork;
+
+            // Copy the entire stockEntries dictionary
+            if (sourcePawn.inventoryStock?.stockEntries != null && targetPawn.inventoryStock != null)
+            {
+                targetPawn.inventoryStock.stockEntries.Clear();
+                foreach (var entry in sourcePawn.inventoryStock.stockEntries)
+                {
+                    targetPawn.inventoryStock.stockEntries[entry.Key] = new InventoryStockEntry
+                    {
+                        count = entry.Value.count,
+                        thingDef = entry.Value.thingDef
+                    };
+                }
+            }
         }
 
         public static void CopyAllPolicies(Pawn sourcePawn, Pawn targetPawn)
