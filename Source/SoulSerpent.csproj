@@ -35,6 +35,7 @@
     <Compile Include="Abilities\Ability_SerpentineTerror.cs" />
     <Compile Include="Abilities\Ability_SoulMark.cs" />
     <Compile Include="Abilities\Ability_SoulPressure.cs" />
+    <Compile Include="Abilities\Ability_SummonOffMapPawn.cs" />
     <Compile Include="AbilityExtension_TargetValidator.cs" />
     <Compile Include="BoundWeaponTransferUtility.cs" />
     <Compile Include="HarmonyPatches\DeathNotificationDisabler.cs" />

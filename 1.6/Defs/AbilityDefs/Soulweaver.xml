@@ -119,4 +119,32 @@
             </li>
         </modExtensions>
     </VEF.Abilities.AbilityDef>
+
+    <VEF.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+        <defName>VS_SummonOffMapPawn</defName>
+        <label>compel marked pawn</label>
+        <description>Compel one of your soul-marked pawns to abandon their current location and journey to your position. The spiritual connection established through soul marking creates an irresistible pull that forces the marked pawn to leave everything behind and travel across the world to reach you. The mark's influence is so powerful that even existing commitments and loyalties cannot overcome the compulsion to seek out their master.</description>
+        <iconPath>Abilities/Soulweaver/SoulCall</iconPath>
+        <abilityClass>SoulSerpent.Ability_SummonOffMapPawn</abilityClass>
+        <castSound>VS_SoulweaverCast</castSound>
+        <targetMode>Self</targetMode>
+        <showUndrafted>true</showUndrafted>
+        <needsTicking>false</needsTicking>
+        <drawAimPie>false</drawAimPie>
+        <cooldownTime>120000</cooldownTime>
+        <castTime>300</castTime>
+        <modExtensions>
+            <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
+                <path>VS_Soulweaver</path>
+                <level>4</level>
+                <order>1</order>
+                <psyfocusCost>0.15</psyfocusCost>
+                <entropyGain>0.4</entropyGain>
+                <prerequisites>
+                    <li>VS_SoulMark</li>
+                </prerequisites>
+                <psychic>False</psychic>
+            </li>
+        </modExtensions>
+    </VEF.Abilities.AbilityDef>
 </Defs>
