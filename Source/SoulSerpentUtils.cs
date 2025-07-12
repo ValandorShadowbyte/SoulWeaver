@@ -40,9 +40,20 @@ namespace SoulSerpent
 
         public static void TryRemoveHediff(Pawn pawn, Hediff hediff)
         {
-            if (pawn != null && hediff != null)
+            if (pawn != null && hediff != null && pawn.health != null && pawn.health.hediffSet != null)
             {
-                pawn.health.RemoveHediff(hediff);
+                try
+                {
+                    // Check if the hediff is actually in the pawn's hediff set before trying to remove it
+                    if (pawn.health.hediffSet.hediffs.Contains(hediff))
+                    {
+                        pawn.health.RemoveHediff(hediff);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Log.Warning($"[SoulSerpent] Error removing hediff {hediff?.def?.defName ?? "Unknown"} from {pawn?.Name?.ToStringFull ?? "Unknown"}: {ex.Message}");
+                }
             }
         }
 
@@ -136,36 +147,58 @@ namespace SoulSerpent
 
         public static void MovePsylink(Pawn source, Pawn dest, bool notifyUpdates = false)
         {
-            var sourcePsylink = PawnUtility.GetMainPsylinkSource(source);
-            var sourceAbilities = PsycastUtility.Psycasts(source);
+            try
+            {
+                var sourcePsylink = PawnUtility.GetMainPsylinkSource(source);
+                var sourceAbilities = PsycastUtility.Psycasts(source);
 
-            if (sourcePsylink != null)
-            {
-                source.health.RemoveHediff(sourcePsylink);
-                dest.health.hediffSet.hediffs.Add(sourcePsylink);
-            }
-            
-            if (sourceAbilities != null)
-            {
-                source.health.RemoveHediff(sourceAbilities);
-                dest.health.hediffSet.hediffs.Add(sourceAbilities);
-            }
-            dest.psychicEntropy.OffsetPsyfocusDirectly(source.psychicEntropy.CurrentPsyfocus);
-            dest.psychicEntropy.TryAddEntropy(source.psychicEntropy.EntropyValue);
-            dest.psychicEntropy.SetPsyfocusTarget(source.psychicEntropy.TargetPsyfocus);
-            dest.psychicEntropy.limitEntropyAmount = source.psychicEntropy.limitEntropyAmount;
-
-            foreach (var ability in source.GetComp<CompAbilities>().LearnedAbilities.ToList())
-            {
-                if (ability.def.GetModExtension<AbilityExtension_Psycast>() != null)
+                if (sourcePsylink != null && source.health != null && dest.health != null)
                 {
-                    dest.GetComp<CompAbilities>().GiveAbility(ability.def);
+                    source.health.RemoveHediff(sourcePsylink);
+                    if (dest.health.hediffSet != null)
+                    {
+                        dest.health.hediffSet.hediffs.Add(sourcePsylink);
+                    }
+                }
+                
+                if (sourceAbilities != null && source.health != null && dest.health != null)
+                {
+                    source.health.RemoveHediff(sourceAbilities);
+                    if (dest.health.hediffSet != null)
+                    {
+                        dest.health.hediffSet.hediffs.Add(sourceAbilities);
+                    }
+                }
+
+                if (source.psychicEntropy != null && dest.psychicEntropy != null)
+                {
+                    dest.psychicEntropy.OffsetPsyfocusDirectly(source.psychicEntropy.CurrentPsyfocus);
+                    dest.psychicEntropy.TryAddEntropy(source.psychicEntropy.EntropyValue);
+                    dest.psychicEntropy.SetPsyfocusTarget(source.psychicEntropy.TargetPsyfocus);
+                    dest.psychicEntropy.limitEntropyAmount = source.psychicEntropy.limitEntropyAmount;
+                }
+
+                var sourceComp = source.GetComp<CompAbilities>();
+                var destComp = dest.GetComp<CompAbilities>();
+                if (sourceComp != null && destComp != null)
+                {
+                    foreach (var ability in sourceComp.LearnedAbilities.ToList())
+                    {
+                        if (ability.def.GetModExtension<AbilityExtension_Psycast>() != null)
+                        {
+                            destComp.GiveAbility(ability.def);
+                        }
+                    }
+                }
+
+                if (notifyUpdates)
+                {
+                    NotifyUpdates(dest);
                 }
             }
-
-            if (notifyUpdates)
+            catch (System.Exception ex)
             {
-                NotifyUpdates(dest);
+                Log.Warning($"[SoulSerpent] Error moving psylink from {source?.Name?.ToStringFull ?? "Unknown"} to {dest?.Name?.ToStringFull ?? "Unknown"}: {ex.Message}");
             }
         }
 
@@ -329,55 +362,16 @@ namespace SoulSerpent
             // Create a PawnGenerationRequest with minimal content
             var request = new PawnGenerationRequest(
                 kind: pawn.kindDef,
-                faction: null,
                 context: PawnGenerationContext.NonPlayer,
                 forceGenerateNewPawn: true,
-                allowDead: false,
-                allowDowned: false,
-                canGeneratePawnRelations: false,
-                mustBeCapableOfViolence: false,
-                colonistRelationChanceFactor: 0f,
-                forceAddFreeWarmLayerIfNeeded: false,
-                allowGay: true,
-                allowPregnant: false,
-                allowFood: false,
-                allowAddictions: false,
-                inhabitant: false,
-                certainlyBeenInCryptosleep: false,
-                forceRedressWorldPawnIfFormerColonist: false,
-                worldPawnFactionDoesntMatter: false,
-                biocodeWeaponChance: 0f,
-                biocodeApparelChance: 0f,
-                extraPawnForExtraRelationChance: null,
-                relationWithExtraPawnChanceFactor: 0f,
-                validatorPreGear: null,
-                validatorPostGear: null,
-                forcedTraits: null,
-                prohibitedTraits: null,
-                minChanceToRedressWorldPawn: null,
                 fixedBiologicalAge: pawn.ageTracker.AgeBiologicalYears,
                 fixedChronologicalAge: pawn.ageTracker.AgeChronologicalYears,
                 fixedGender: pawn.gender,
-                fixedLastName: null,
-                fixedBirthName: null,
-                fixedTitle: null,
-                fixedIdeo: null,
-                forceNoIdeo: false,
-                forceNoBackstory: false,
+                forceNoIdeo: true,
                 forbidAnyTitle: true,
-                forceDead: false,
-                forcedXenogenes: null,
-                forcedEndogenes: null,
                 forcedXenotype: pawn.genes?.Xenotype,
-                forcedCustomXenotype: null,
-                allowedXenotypes: null,
-                forceBaselinerChance: 0f,
                 developmentalStages: DevelopmentalStage.Adult,
-                pawnKindDefGetter: null,
-                excludeBiologicalAgeRange: null,
-                biologicalAgeRange: null,
                 forceRecruitable: true,
-                minimumAgeTraits: 0,
                 maximumAgeTraits: 0,
                 forceNoGear: true
             );
@@ -385,14 +379,24 @@ namespace SoulSerpent
             // Create the husk with the request
             Pawn husk = PawnGenerator.GeneratePawn(request);
 
+            // Ensure the husk was created successfully
+            if (husk == null)
+            {
+                Log.Error("[SoulSerpent] Failed to generate husk pawn");
+                return;
+            }
+
             // Copy the appearance/body
             husk.Name = new NameSingle($"{pawn.Name} (Husk)");
 
             // Copy backstories
-            husk.story.Childhood = pawn.story.Childhood;
-            husk.story.Adulthood = pawn.story.Adulthood;
+            if (husk.story != null && pawn.story != null)
+            {
+                husk.story.Childhood = pawn.story.Childhood;
+                husk.story.Adulthood = pawn.story.Adulthood;
+            }
 
-            if (ModsConfig.BiotechActive && pawn.genes != null)
+            if (ModsConfig.BiotechActive && pawn.genes != null && husk.genes != null)
             {
                 // Copy xenotype
                 husk.genes.SetXenotype(pawn.genes.Xenotype);
@@ -422,61 +426,106 @@ namespace SoulSerpent
             }
 
             // Copy style elements (tattoos, etc.)
-            if (ModsConfig.IdeologyActive)
+            if (ModsConfig.IdeologyActive && husk.style != null && pawn.style != null)
             {
                 husk.style.BodyTattoo = pawn.style.BodyTattoo;
                 husk.style.FaceTattoo = pawn.style.FaceTattoo;
             }
 
-            husk.story.skinColorOverride = pawn.story.skinColorOverride;
-            husk.story.HairColor = pawn.story.HairColor;
-            husk.story.hairDef = pawn.story.hairDef;
-            husk.story.bodyType = pawn.story.bodyType;
-            husk.story.headType = pawn.story.headType;
-            husk.story.SkinColorBase = pawn.story.SkinColorBase;
-            husk.style.beardDef = pawn.style.beardDef;
+            if (husk.story != null && pawn.story != null)
+            {
+                husk.story.skinColorOverride = pawn.story.skinColorOverride;
+                husk.story.HairColor = pawn.story.HairColor;
+                husk.story.hairDef = pawn.story.hairDef;
+                husk.story.bodyType = pawn.story.bodyType;
+                husk.story.headType = pawn.story.headType;
+                husk.story.SkinColorBase = pawn.story.SkinColorBase;
+            }
+
+            if (husk.style != null && pawn.style != null)
+            {
+                husk.style.beardDef = pawn.style.beardDef;
+            }
 
             // Remove ALL hediffs (in case any were generated)
             if (husk.health != null && husk.health.hediffSet != null)
             {
-                var hediffsToRemove = husk.health.hediffSet.hediffs.ToList();
-                foreach (Hediff hediff in hediffsToRemove)
+                // Use a safer approach to avoid index out of range exceptions
+                while (husk.health.hediffSet.hediffs.Count > 0)
                 {
-                    if (hediff != null && husk.health.hediffSet.hediffs.Contains(hediff))
+                    var hediff = husk.health.hediffSet.hediffs[0];
+                    if (hediff != null)
                     {
                         husk.health.RemoveHediff(hediff);
+                    }
+                    else
+                    {
+                        // If we get a null hediff, remove it directly from the list to avoid infinite loop
+                        husk.health.hediffSet.hediffs.RemoveAt(0);
                     }
                 }
             }
 
             // Disable all work types by adding them to the disabled list
-            husk.workSettings.EnableAndInitialize();
-            foreach (WorkTypeDef workType in DefDatabase<WorkTypeDef>.AllDefs)
+            if (husk.workSettings != null)
             {
-                if (!husk.GetDisabledWorkTypes().Contains(workType))
+                husk.workSettings.EnableAndInitialize();
+                foreach (WorkTypeDef workType in DefDatabase<WorkTypeDef>.AllDefs)
                 {
-                    husk.workSettings.Disable(workType);
+                    if (!husk.GetDisabledWorkTypes().Contains(workType))
+                    {
+                        husk.workSettings.Disable(workType);
+                    }
                 }
             }
 
             // Clear all skills
-            foreach (SkillRecord skill in husk.skills.skills)
+            if (husk.skills != null)
             {
-                skill.levelInt = 0;
-                skill.passion = Passion.None;
-                skill.xpSinceLastLevel = 0f;
-                skill.xpSinceMidnight = 0f;
+                foreach (SkillRecord skill in husk.skills.skills)
+                {
+                    skill.levelInt = 0;
+                    skill.passion = Passion.None;
+                    skill.xpSinceLastLevel = 0f;
+                    skill.xpSinceMidnight = 0f;
+                }
             }
 
             // Kill the husk to create a corpse
             try
             {
-                husk.Kill(null);
-                
-                // Spawn the corpse at original location
-                if (husk.Corpse != null && originalMap != null)
+                // Ensure the husk is in a valid state before killing
+                if (husk != null && !husk.Dead && husk.health != null)
                 {
-                    GenSpawn.Spawn(husk.Corpse, originalPosition, originalMap);
+                    // Double-check that all hediffs are removed
+                    if (husk.health.hediffSet != null && husk.health.hediffSet.hediffs.Count > 0)
+                    {
+                        Log.Warning($"[SoulSerpent] Husks still has {husk.health.hediffSet.hediffs.Count} hediffs before killing, attempting to remove them");
+                        while (husk.health.hediffSet.hediffs.Count > 0)
+                        {
+                            var hediff = husk.health.hediffSet.hediffs[0];
+                            if (hediff != null)
+                            {
+                                husk.health.RemoveHediff(hediff);
+                            }
+                            else
+                            {
+                                husk.health.hediffSet.hediffs.RemoveAt(0);
+                            }
+                        }
+                    }
+                    
+                    husk.Kill(null);
+                    
+                    // Spawn the corpse at original location
+                    if (husk.Corpse != null && originalMap != null)
+                    {
+                        GenSpawn.Spawn(husk.Corpse, originalPosition, originalMap);
+                    }
+                }
+                else
+                {
+                    Log.Warning($"[SoulSerpent] Cannot kill husk - it is null, dead, or has no health component");
                 }
             }
             catch (System.Exception ex)
