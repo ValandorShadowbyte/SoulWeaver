@@ -2,8 +2,9 @@
     <name>Soul &amp; Serpent</name>
     <author>ValandorShadowbyte</author>
     <supportedVersions>
-        <li>1.5</li>
+        <li>1.6</li>
     </supportedVersions>
+	<modVersion>0.1</modVersion>
     <description>Soul &amp; Serpent adds two powerful and forbidden psycast paths to RimWorld:
 
 Soulweaver: Masters of consciousness transfer who can possess enemies, swap bodies with allies, and achieve immortality through continuous soul transfer. These dark practitioners are feared for their ability to never truly die, always finding a new host when their current vessel fails them.
@@ -26,7 +27,6 @@ Snakesage: Practitioners of serpentine psycasts who channel the primal power of 
     <packageId>ValandorShadowbyte.SoulSerpent</packageId>
     <loadAfter>
         <li>brrainz.harmony</li>
-        <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
         <li>VanillaExpanded.VPsycastsE</li>
     </loadAfter>
 </ModMetaData>

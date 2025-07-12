@@ -354,7 +354,7 @@ namespace SoulSerpent
 
         public static void CopyWorkSettings(Pawn sourcePawn, Pawn targetPawn)
         {
-            // Copy work schedule (from previous answer)
+            // Copy work schedule
             CopyWorkSchedule(sourcePawn, targetPawn);
             
             // Copy work priorities
