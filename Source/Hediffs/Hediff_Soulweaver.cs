@@ -164,6 +164,16 @@ namespace SoulSerpent
                     target
                 );
 
+                //copy nickname
+                if (pawn.Name is NameTriple sourceNameTriple && target.Name is NameTriple targetNameTriple)
+                {
+                    target.Name = new NameTriple(
+                        targetNameTriple.First,
+                        sourceNameTriple.Nick,
+                        targetNameTriple.Last
+                    );
+                }
+
                 return target;
             }
 
