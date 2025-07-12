@@ -299,6 +299,23 @@ namespace SoulSerpent
             }
         }
 
+        /// <summary>
+        /// Copies the work schedule from the source pawn to the target pawn
+        /// </summary>
+        /// <param name="sourcePawn">The pawn to copy the schedule from</param>
+        /// <param name="targetPawn">The pawn to copy the schedule to</param>
+        public static void CopyWorkSchedule(Pawn sourcePawn, Pawn targetPawn)
+        {
+            if (sourcePawn.timetable == null || targetPawn.timetable == null)
+                return;
+                
+            // Copy the 24-hour schedule
+            for (int i = 0; i < 24; i++)
+            {
+                targetPawn.timetable.times[i] = sourcePawn.timetable.times[i];
+            }
+        }
+
         public static void NotifyUpdates(Pawn pawn)
         {
             pawn.Notify_DisabledWorkTypesChanged();

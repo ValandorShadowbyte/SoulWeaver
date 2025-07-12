@@ -136,6 +136,7 @@ namespace SoulSerpent
                 SoulSerpentUtils.CopySkills(pawn, target);
                 SoulSerpentUtils.CopyBeliefs(pawn, target);
                 UpdateChronoTime(pawn, target);
+                SoulSerpentUtils.CopyWorkSchedule(pawn, target);
 
                 //get the mark
                 Hediff mark = SoulSerpentUtils.TryGetHediff<Hediff_SoulMark>(target, SoulSerpentDefs.VS_SoulMark) ??
@@ -235,5 +236,7 @@ namespace SoulSerpent
                 }
             }
         }
+
+
     }
 }
