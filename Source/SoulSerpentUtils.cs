@@ -377,6 +377,33 @@ namespace SoulSerpent
             targetPawn.playerSettings.followFieldwork = sourcePawn.playerSettings.followFieldwork;
         }
 
+        public static void CopyAllPolicies(Pawn sourcePawn, Pawn targetPawn)
+        {
+            // Copy drug policy
+            if (sourcePawn.drugs?.CurrentPolicy != null && targetPawn.drugs != null)
+            {
+                targetPawn.drugs.CurrentPolicy = sourcePawn.drugs.CurrentPolicy;
+            }
+            
+            // Copy reading policy
+            if (sourcePawn.reading?.CurrentPolicy != null && targetPawn.reading != null)
+            {
+                targetPawn.reading.CurrentPolicy = sourcePawn.reading.CurrentPolicy;
+            }
+
+            // Copy food restriction policy
+            if (sourcePawn.foodRestriction?.CurrentFoodPolicy != null && targetPawn.foodRestriction != null)
+            {
+                targetPawn.foodRestriction.CurrentFoodPolicy = sourcePawn.foodRestriction.CurrentFoodPolicy;
+            }
+
+            // Copy apparel policy
+            if (sourcePawn.outfits?.CurrentApparelPolicy != null && targetPawn.outfits != null)
+            {
+                targetPawn.outfits.CurrentApparelPolicy = sourcePawn.outfits.CurrentApparelPolicy;
+            }
+        }
+
         public static void NotifyUpdates(Pawn pawn)
         {
             pawn.Notify_DisabledWorkTypesChanged();
