@@ -577,6 +577,8 @@ namespace SoulSerpent
                 forceNoGear: true
             );
 
+            request.ForceNoIdeoGear = true;
+
             // Create the husk with the request
             Pawn husk = PawnGenerator.GeneratePawn(request);
 
