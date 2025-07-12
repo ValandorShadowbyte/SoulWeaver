@@ -97,19 +97,13 @@ namespace SoulSerpent
             }
 
 
-            if (target != null) 
-            {
-                SoulSerpentUtils.CreateHusk(pawn);
-                SoulSerpentUtils.DestroyPawnIntoGore(pawn);
-
-                CleanupSelfMemories(pawn, target);
-            }
-            else
+            if (target == null) 
             {
                 SoulSerpentUtils.SoulweaverDeath(pawn);
             }
         }
 
+        /// <returns>The pawn that was transfered to, or null if we couldn't transfer</returns>
         public Pawn TransferToTarget(Pawn target)
         {
             if (target != null && MarkedPawns.Contains(target))
@@ -173,6 +167,11 @@ namespace SoulSerpent
                         targetNameTriple.Last
                     );
                 }
+
+                SoulSerpentUtils.CreateHusk(pawn);
+                SoulSerpentUtils.DestroyPawnIntoGore(pawn);
+
+                CleanupSelfMemories(pawn, target);
 
                 return target;
             }
