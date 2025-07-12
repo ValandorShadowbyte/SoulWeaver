@@ -9,8 +9,8 @@ namespace SoulSerpent
     {
         public bool IsDown;
         public bool NotDown;
-        public bool IsMarked;
-        public bool IsAdvancedMarked;
+        public bool IsOwnMarked;
+        public bool IsOwnAdvancedMarked;
         public bool NotResistingSoulMark;
         public bool NotMarked;
         public bool NotAwakenedMarked;
@@ -48,7 +48,7 @@ namespace SoulSerpent
                     return false;
                 }
 
-                if (IsMarked && !SoulSerpentUtils.HasSoulMark(target.Pawn))
+                if (IsOwnMarked && !SoulSerpentUtils.HasOwnSoulMark(target.Pawn, ability.pawn))
                 {
                     if (throwMessages)
                     {
@@ -58,7 +58,7 @@ namespace SoulSerpent
                     return false;
                 }
 
-                if (IsAdvancedMarked && !SoulSerpentUtils.HasAwakenedSoulMark(target.Pawn))
+                if (IsOwnAdvancedMarked && !SoulSerpentUtils.HasOwnAwakenedSoulMark(target.Pawn, ability.pawn))
                 {
                     if (throwMessages)
                     {

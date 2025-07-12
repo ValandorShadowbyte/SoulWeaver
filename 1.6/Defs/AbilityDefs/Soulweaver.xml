@@ -71,7 +71,7 @@
                 <psychic>False</psychic>
             </li>
             <li Class="SoulSerpent.AbilityExtension_TargetValidator"> 
-                <IsMarked>True</IsMarked>
+                <IsOwnMarked>True</IsOwnMarked>
                 <NotResistingSoulMark>True</NotResistingSoulMark>
                 <NotDown>True</NotDown>
             </li>
@@ -112,7 +112,7 @@
                 <psychic>False</psychic>
             </li>
             <li Class="SoulSerpent.AbilityExtension_TargetValidator"> 
-                <IsMarked>True</IsMarked>
+                <IsOwnMarked>True</IsOwnMarked>
                 <NotResistingSoulMark>True</NotResistingSoulMark>
                 <NotAwakenedMarked>True</NotAwakenedMarked>
                 <NotSoulMarkAwakening>True</NotSoulMarkAwakening>

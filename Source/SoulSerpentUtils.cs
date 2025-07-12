@@ -116,6 +116,24 @@ namespace SoulSerpent
         }
 
         /// <summary>
+        /// Checks if a pawn has a basic soul mark from a specific caster
+        /// </summary>
+        /// <param name="pawn">The pawn to check</param>
+        /// <param name="caster">The caster to check against</param>
+        /// <returns>True if the pawn has a basic soul mark from the specified caster</returns>
+        public static bool HasOwnSoulMark(Pawn pawn, Pawn caster)
+        {
+            var soulMark = TryGetHediff<Hediff_SoulMark>(pawn, SoulSerpentDefs.VS_SoulMark);
+            if (soulMark != null && soulMark.Master == caster)
+            {
+                return true;
+            }
+
+            var awakenedSoulMark = TryGetHediff<Hediff_SoulMark>(pawn, SoulSerpentDefs.VS_AwakenedSoulMark);
+            return awakenedSoulMark != null && awakenedSoulMark.Master == caster;
+        }
+
+        /// <summary>
         /// Checks if a pawn has an awakened (advanced) soul mark
         /// </summary>
         /// <param name="pawn">The pawn to check</param>
@@ -123,6 +141,18 @@ namespace SoulSerpent
         public static bool HasAwakenedSoulMark(Pawn pawn)
         {
             return TryGetHediff<Hediff>(pawn, SoulSerpentDefs.VS_AwakenedSoulMark) != null;
+        }
+
+        /// <summary>
+        /// Checks if a pawn has an awakened soul mark from a specific caster
+        /// </summary>
+        /// <param name="pawn">The pawn to check</param>
+        /// <param name="caster">The caster to check against</param>
+        /// <returns>True if the pawn has an awakened soul mark from the specified caster</returns>
+        public static bool HasOwnAwakenedSoulMark(Pawn pawn, Pawn caster)
+        {
+            var awakenedSoulMark = TryGetHediff<Hediff_SoulMark>(pawn, SoulSerpentDefs.VS_AwakenedSoulMark);
+            return awakenedSoulMark != null && awakenedSoulMark.Master == caster;
         }
 
         /// <summary>
