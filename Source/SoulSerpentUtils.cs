@@ -200,11 +200,29 @@ namespace SoulSerpent
                     }
                 }
 
+                // Use reflection to access private fields for proper psyfocus copying
                 if (source.psychicEntropy != null && dest.psychicEntropy != null)
                 {
-                    dest.psychicEntropy.OffsetPsyfocusDirectly(source.psychicEntropy.CurrentPsyfocus);
-                    dest.psychicEntropy.TryAddEntropy(source.psychicEntropy.EntropyValue);
-                    dest.psychicEntropy.SetPsyfocusTarget(source.psychicEntropy.TargetPsyfocus);
+                    // Access private fields using reflection
+                    var currentEntropyField = typeof(Pawn_PsychicEntropyTracker).GetField("currentEntropy", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                    var currentPsyfocusField = typeof(Pawn_PsychicEntropyTracker).GetField("currentPsyfocus", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                    var targetPsyfocusField = typeof(Pawn_PsychicEntropyTracker).GetField("targetPsyfocus", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
+                    if (currentEntropyField != null && currentPsyfocusField != null && targetPsyfocusField != null)
+                    {
+                        // Copy the actual field values
+                        currentEntropyField.SetValue(dest.psychicEntropy, currentEntropyField.GetValue(source.psychicEntropy));
+                        currentPsyfocusField.SetValue(dest.psychicEntropy, currentPsyfocusField.GetValue(source.psychicEntropy));
+                        targetPsyfocusField.SetValue(dest.psychicEntropy, targetPsyfocusField.GetValue(source.psychicEntropy));
+                    }
+                    else
+                    {
+                        // Fallback to public methods if reflection fails
+                        dest.psychicEntropy.OffsetPsyfocusDirectly(source.psychicEntropy.CurrentPsyfocus);
+                        dest.psychicEntropy.TryAddEntropy(source.psychicEntropy.EntropyValue);
+                        dest.psychicEntropy.SetPsyfocusTarget(source.psychicEntropy.TargetPsyfocus);
+                    }
+                    
                     dest.psychicEntropy.limitEntropyAmount = source.psychicEntropy.limitEntropyAmount;
                 }
 
