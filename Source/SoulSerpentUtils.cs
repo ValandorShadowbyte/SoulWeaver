@@ -299,6 +299,18 @@ namespace SoulSerpent
             }
         }
 
+        public static void CopyWorkSettings(Pawn sourcePawn, Pawn targetPawn)
+        {
+            // Copy work schedule (from previous answer)
+            CopyWorkSchedule(sourcePawn, targetPawn);
+            
+            // Copy work priorities
+            CopyWorkPriorities(sourcePawn, targetPawn);
+            
+            // Copy player settings (areas, medical care, etc.)
+            CopyPlayerSettings(sourcePawn, targetPawn);
+        }
+
         /// <summary>
         /// Copies the work schedule from the source pawn to the target pawn
         /// </summary>
@@ -314,6 +326,55 @@ namespace SoulSerpent
             {
                 targetPawn.timetable.times[i] = sourcePawn.timetable.times[i];
             }
+        }
+
+        public static void CopyWorkPriorities(Pawn sourcePawn, Pawn targetPawn)
+        {
+            if (sourcePawn.workSettings == null || targetPawn.workSettings == null)
+                return;
+                
+            // Ensure work settings are initialized
+            if (!targetPawn.workSettings.Initialized)
+                targetPawn.workSettings.EnableAndInitialize();
+                
+            // Copy all work type priorities
+            var allWorkTypes = DefDatabase<WorkTypeDef>.AllDefsListForReading;
+            for (int i = 0; i < allWorkTypes.Count; i++)
+            {
+                WorkTypeDef workType = allWorkTypes[i];
+                
+                // Only copy if the target pawn can do this work type
+                if (!targetPawn.WorkTypeIsDisabled(workType))
+                {
+                    int priority = sourcePawn.WorkTypeIsDisabled(workType) ? 0 : sourcePawn.workSettings.GetPriority(workType);
+                    targetPawn.workSettings.SetPriority(workType, priority);
+                }
+            }
+        }
+
+        public static void CopyPlayerSettings(Pawn sourcePawn, Pawn targetPawn)
+        {
+            if (sourcePawn.playerSettings == null || targetPawn.playerSettings == null)
+                return;
+                
+            // Copy medical care settings
+            targetPawn.playerSettings.medCare = sourcePawn.playerSettings.medCare;
+            
+            // Copy self-tend setting
+            targetPawn.playerSettings.selfTend = sourcePawn.playerSettings.selfTend;
+            
+            // Copy hostility response mode
+            targetPawn.playerSettings.hostilityResponse = sourcePawn.playerSettings.hostilityResponse;
+            
+            // Copy area restrictions (if on same map)
+            if (sourcePawn.Map == targetPawn.Map && sourcePawn.playerSettings.AreaRestrictionInPawnCurrentMap != null)
+            {
+                targetPawn.playerSettings.AreaRestrictionInPawnCurrentMap = sourcePawn.playerSettings.AreaRestrictionInPawnCurrentMap;
+            }
+            
+            // Copy follow settings
+            targetPawn.playerSettings.followDrafted = sourcePawn.playerSettings.followDrafted;
+            targetPawn.playerSettings.followFieldwork = sourcePawn.playerSettings.followFieldwork;
         }
 
         public static void NotifyUpdates(Pawn pawn)
