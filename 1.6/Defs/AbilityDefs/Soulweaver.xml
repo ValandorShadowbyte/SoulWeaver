@@ -102,8 +102,8 @@
         <modExtensions>
             <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
                 <path>VS_Soulweaver</path>
-                <level>3</level>
-                <order>1</order>
+                <level>2</level>
+                <order>2</order>
                 <psyfocusCost>0.2</psyfocusCost>
                 <entropyGain>0.5</entropyGain>
                 <prerequisites>
@@ -136,8 +136,8 @@
         <modExtensions>
             <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
                 <path>VS_Soulweaver</path>
-                <level>4</level>
-                <order>1</order>
+                <level>2</level>
+                <order>3</order>
                 <psyfocusCost>0.15</psyfocusCost>
                 <entropyGain>0.4</entropyGain>
                 <prerequisites>
@@ -172,7 +172,7 @@
         <modExtensions>
             <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
                 <path>VS_Soulweaver</path>
-                <level>5</level>
+                <level>3</level>
                 <order>1</order>
                 <psyfocusCost>0.3</psyfocusCost>
                 <entropyGain>0.8</entropyGain>
