@@ -120,7 +120,7 @@
         </modExtensions>
     </VEF.Abilities.AbilityDef>
 
-    <VEF.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+    <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
         <defName>VS_SummonOffMapPawn</defName>
         <label>compel marked pawn</label>
         <description>Compel one of your soul-marked pawns to abandon their current location and journey to your position. The spiritual connection established through soul marking creates an irresistible pull that forces the marked pawn to leave everything behind and travel across the world to reach you. The mark's influence is so powerful that even existing commitments and loyalties cannot overcome the compulsion to seek out their master.</description>

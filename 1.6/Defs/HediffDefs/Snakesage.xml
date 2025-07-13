@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+    <HediffDef ParentName="PsycastHediffBase">
+        <defName>VS_SerpentineTerror</defName>
+        <label>serpentine terror</label>
+        <description>An overwhelming aura of serpentine terror emanates from this psycast, filling the area with primal fear. The very air seems to writhe with invisible serpents, and the mind is assaulted by visions of slithering shadows and venomous fangs. This psychological assault creates a zone of paralyzing dread that affects all hostile pawns within its radius.</description>
+        <hediffClass>SoulSerpent.Hediff_SerpentineTerror</hediffClass>
+        <isBad>False</isBad>
+        <comps>
+            <li Class="VanillaPsycastsExpanded.HediffCompProperties_PlaySound">
+                <endSound>VPE_PsychicDrone_End</endSound>
+                <sustainer>VPE_PsychicDrone_Sustainer</sustainer>
+            </li>
+            <li Class="VanillaPsycastsExpanded.HediffCompProperties_DisappearsOnDowned"/>
+            <li Class="VanillaPsycastsExpanded.HediffCompProperties_DisappearsOnDespawn"/>
+        </comps>
+    </HediffDef>
+</Defs>

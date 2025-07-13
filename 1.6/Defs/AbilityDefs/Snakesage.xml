@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-    <VEF.Abilities.AbilityDef ParentName="VPE_PsycastGoToTargetBase">
+    <VEF.Abilities.AbilityDef ParentName="VPE_PsycastBase">
         <defName>VS_SerpentineTerror</defName>
         <label>serpentine terror</label>
-        <description>Channel the primal fear of serpents into your target's mind, overwhelming them with visions of slithering shadows and venomous fangs. This ancient technique instills deep psychological terror, causing the target to experience paralyzing fear from the overwhelming serpentine presence invading their consciousness.</description>
+        <description>Channel the primal fear of serpents into the minds of all enemies within range, overwhelming them with visions of slithering shadows and venomous fangs. This ancient technique creates an area of psychological terror, causing all hostile pawns in the radius to experience paralyzing fear from the overwhelming serpentine presence invading their consciousness.</description>
         <iconPath>Abilities/Snakesage/SerpentineTerror</iconPath>
-        <abilityClass>SoulSerpent.Ability_SerpentineTerror</abilityClass>
+        <abilityClass>VEF.Abilities.Ability_Blank</abilityClass>
         <castSound>VS_SnakesageCast</castSound>
-        <targetMode>Pawn</targetMode>
-        <distanceToTarget>1.5</distanceToTarget>
-        <needsTicking>true</needsTicking>
-        <drawAimPie>false</drawAimPie>
-        <targetingParameters>
-            <canTargetBuildings>False</canTargetBuildings>
-            <canTargetSelf>False</canTargetSelf>
-            <canTargetAnimals>True</canTargetAnimals>
-            <canTargetPawns>True</canTargetPawns>
-            <canTargetHumans>True</canTargetHumans>
-            <canTargetMechs>False</canTargetMechs>
-        </targetingParameters>
+        <durationTime>1800</durationTime>
+        <targetMode>Self</targetMode>
+        <radius>25.9</radius>
         <castTime>100</castTime>
         <modExtensions>
             <li Class="VanillaPsycastsExpanded.AbilityExtension_Psycast">
@@ -28,6 +19,10 @@
                 <psyfocusCost>0.1</psyfocusCost>
                 <entropyGain>0.3</entropyGain>
                 <psychic>False</psychic>
+            </li>
+            <li Class="VEF.Abilities.AbilityExtension_Hediff">
+                <hediff>VS_SerpentineTerror</hediff>
+                <durationMultiplier>PsychicSensitivity</durationMultiplier>
             </li>
         </modExtensions>
     </VEF.Abilities.AbilityDef>

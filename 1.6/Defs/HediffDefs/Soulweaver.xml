@@ -2,7 +2,7 @@
 <Defs>
     <HediffDef>
         <defName>VS_Soulweaver</defName>
-        <label>Soulweaver</label>
+        <label>soulweaver</label>
         <description>Your consciousness has been awakened to the forbidden art of soul manipulation.</description>
         <hediffClass>SoulSerpent.Hediff_Soulweaver</hediffClass>
         <isBad>False</isBad>
