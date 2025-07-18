@@ -28,5 +28,6 @@ Snakesage: Practitioners of serpentine psycasts who channel the primal power of 
     <loadAfter>
         <li>brrainz.harmony</li>
         <li>VanillaExpanded.VPsycastsE</li>
+        <li>LifeisGame.WorldOfNaruto</li>
     </loadAfter>
 </ModMetaData>
