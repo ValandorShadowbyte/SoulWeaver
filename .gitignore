@@ -38,8 +38,6 @@
 *.DS_Store
 Thumbs.db
 
-# C# side
-Source/Plugins/*
-
+# prevent other mod assemblies from being commited
 Assemblies/*
 !Assemblies/SoulSerpent.dll

@@ -38,7 +38,6 @@
     <Compile Include="Abilities\Ability_SummonOffMapPawn.cs" />
     <Compile Include="AbilityExtension_TargetValidator.cs" />
     <Compile Include="BoundWeaponTransferUtility.cs" />
-    <Compile Include="ExternalModService.cs" />
     <Compile Include="HarmonyPatches\DeathNotificationDisabler.cs" />
     <Compile Include="Hediffs\Hediff_AwakenedSoulMark.cs" />
     <Compile Include="Hediffs\Hediff_BodyDecay.cs" />
@@ -63,25 +62,23 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="VanillaPsycastsExpanded">
-      <HintPath>Plugins\VanillaPsycastsExpanded.dll</HintPath>
+      <HintPath>..\..\2842502659\1.6\Assemblies\VanillaPsycastsExpanded.dll</HintPath>
     </Reference>
     <Reference Include="VEF">
-      <HintPath>Plugins\VEF.dll</HintPath>
+      <HintPath>..\..\2023507013\1.6\Assemblies\VEF.dll</HintPath>
     </Reference>
     <Reference Include="NarutoMod">
-      <HintPath>Plugins\NarutoMod.dll</HintPath>
+      <HintPath>..\..\3025338958\1.6\Assemblies\NarutoMod.dll</HintPath>
     </Reference>
     <Reference Include="TaranMagicFramework">
-      <HintPath>Plugins\TaranMagicFramework.dll</HintPath>
+      <HintPath>..\..\3527502876\1.6\Assemblies\TaranMagicFramework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Target Name="CustomCleanHarmony" AfterTargets="Build">
-    <Delete Files="$(OutputPath)0Harmony.dll" />
-    <Delete Files="$(OutputPath)0Harmony.pdb" />
-    <Delete Files="$(OutputPath)VEF.dll" />
-    <Delete Files="$(OutputPath)VanillaPsycastsExpanded.dll" />
-    <Delete Files="$(OutputPath)NarutoMod.dll" />
-    <Delete Files="$(OutputPath)TaranMagicFramework.dll" />
+    <ItemGroup>
+      <FilesToDelete Include="$(OutputPath)*.*" Exclude="$(OutputPath)SoulSerpent.dll" />
+    </ItemGroup>
+    <Delete Files="@(FilesToDelete)" />
   </Target>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

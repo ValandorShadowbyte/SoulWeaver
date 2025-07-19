@@ -1,0 +1,16 @@
+---
+description: 
+globs: *.cs
+alwaysApply: false
+---
+# Build Script Rule
+
+Whenever you make changes to any C# source files in the `Source/` directory, you must run the build task defined in `.vscode/tasks.json` (label: `Build SoulSerpent Mod`) to rebuild the project. This ensures that your changes are compiled and up to date.
+
+**You MUST do the following after any edit to a C# file in Source/:**
+- Run the `Build SoulSerpent Mod` task from `.vscode/tasks.json` immediately after the change.
+- Do not consider the task complete until the build is run and the result (success or failure) is reported to the user.
+- If the build fails, show the error and offer to help fix it.
+- If the build succeeds, confirm to the user that the project is up to date.
+
+This rule is mandatory for all C# development in this mod.

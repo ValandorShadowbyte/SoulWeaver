@@ -23,6 +23,11 @@ Snakesage: Practitioners of serpentine psycasts who channel the primal power of 
             <displayName>Vanilla Psycasts Expanded</displayName>
             <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2842502659</steamWorkshopUrl>
         </li>
+        <li>
+            <packageId>LifeisGame.WorldOfNaruto</packageId>
+            <displayName>World of Naruto</displayName>
+            <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=3025338958</steamWorkshopUrl>
+        </li>
     </modDependencies>
     <packageId>ValandorShadowbyte.SoulSerpent</packageId>
     <loadAfter>
